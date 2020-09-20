@@ -1,14 +1,8 @@
 ---
-title: elm-pages-starter - a simple blog starter
-type: page
+title: Dillon Kearns - Elm Coach and Trainer
 ---
 
-This is an example repo to get you up and running with `elm-pages`.
+Hi, I'm Dillon!
 
-The entrypoint file is `index.js`. That file imports `src/Main.elm`. The `content` folder is turned into your static pages. The rest is mostly determined by logic in the Elm code! Learn more with the resources below.
-
-## Learn more about `elm-pages`
-
-- Documentation site: https://elm-pages.com
-- [Elm Package docs](https://package.elm-lang.org/packages/dillonkearns/elm-pages/latest/)
-- [`elm-pages` blog](https://elm-pages.com/blog)
+If you're looking for my Elm writing, courses, and services, you can find that
+at [incrementalelm.com](https://incrementalelm.com).

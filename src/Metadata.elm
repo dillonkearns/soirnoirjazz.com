@@ -31,52 +31,56 @@ type alias PageMetadata =
 
 decoder : Decoder Metadata
 decoder =
-    Decode.field "type" Decode.string
-        |> Decode.andThen
-            (\pageType ->
-                case pageType of
-                    "page" ->
-                        Decode.field "title" Decode.string
-                            |> Decode.map (\title -> Page { title = title })
+    Decode.oneOf
+        [ Decode.field "type" Decode.string
+            |> Decode.andThen
+                (\pageType ->
+                    case pageType of
+                        "page" ->
+                            Decode.field "title" Decode.string
+                                |> Decode.map (\title -> Page { title = title })
 
-                    "blog-index" ->
-                        Decode.succeed BlogIndex
+                        "blog-index" ->
+                            Decode.succeed BlogIndex
 
-                    "author" ->
-                        Decode.map3 Data.Author.Author
-                            (Decode.field "name" Decode.string)
-                            (Decode.field "avatar" imageDecoder)
-                            (Decode.field "bio" Decode.string)
-                            |> Decode.map Author
+                        "author" ->
+                            Decode.map3 Data.Author.Author
+                                (Decode.field "name" Decode.string)
+                                (Decode.field "avatar" imageDecoder)
+                                (Decode.field "bio" Decode.string)
+                                |> Decode.map Author
 
-                    "blog" ->
-                        Decode.map6 ArticleMetadata
-                            (Decode.field "title" Decode.string)
-                            (Decode.field "description" Decode.string)
-                            (Decode.field "published"
-                                (Decode.string
-                                    |> Decode.andThen
-                                        (\isoString ->
-                                            case Date.fromIsoString isoString of
-                                                Ok date ->
-                                                    Decode.succeed date
+                        "blog" ->
+                            Decode.map6 ArticleMetadata
+                                (Decode.field "title" Decode.string)
+                                (Decode.field "description" Decode.string)
+                                (Decode.field "published"
+                                    (Decode.string
+                                        |> Decode.andThen
+                                            (\isoString ->
+                                                case Date.fromIsoString isoString of
+                                                    Ok date ->
+                                                        Decode.succeed date
 
-                                                Err error ->
-                                                    Decode.fail error
-                                        )
+                                                    Err error ->
+                                                        Decode.fail error
+                                            )
+                                    )
                                 )
-                            )
-                            (Decode.field "author" Data.Author.decoder)
-                            (Decode.field "image" imageDecoder)
-                            (Decode.field "draft" Decode.bool
-                                |> Decode.maybe
-                                |> Decode.map (Maybe.withDefault False)
-                            )
-                            |> Decode.map Article
+                                (Decode.field "author" Data.Author.decoder)
+                                (Decode.field "image" imageDecoder)
+                                (Decode.field "draft" Decode.bool
+                                    |> Decode.maybe
+                                    |> Decode.map (Maybe.withDefault False)
+                                )
+                                |> Decode.map Article
 
-                    _ ->
-                        Decode.fail ("Unexpected page type " ++ pageType)
-            )
+                        _ ->
+                            Decode.fail ("Unexpected page type " ++ pageType)
+                )
+        , Decode.field "title" Decode.string
+            |> Decode.map (\title -> Page { title = title })
+        ]
 
 
 imageDecoder : Decoder (ImagePath Pages.PathKey)
