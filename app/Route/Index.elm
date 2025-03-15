@@ -346,7 +346,7 @@ eventView zone event =
                             ]
                         ]
                     ]
-                , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-gray-400/50 xl:pl-3.5" ]
+                , Html.div [ Attr.class "min-w-3xs mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-gray-400/50 xl:pl-3.5" ]
                     [ Html.dt [ Attr.class "mt-0.5" ]
                         [ mapIcon ]
                     , Html.dd []
