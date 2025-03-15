@@ -432,14 +432,18 @@ foxWine =
 
 video1 : Html msg
 video1 =
-    Html.iframe
-        [ Attr.width 560
-        , Attr.height 315
-        , Attr.src "https://www.youtube.com/embed/9wXe_-JZu5A?si=tnr0Ni7pvxM7Z9cZ"
-        , Attr.title "YouTube video player"
-        , Attr.attribute "frameborder" "0"
-        , Attr.attribute "allow" "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        , Attr.attribute "referrerpolicy" "strict-origin-when-cross-origin"
-        , Attr.attribute "allowfullscreen" ""
-        ]
+    Html.div
         []
+        [ Html.iframe
+            [ Attr.src "https://www.youtube.com/embed/9wXe_-JZu5A?si=tnr0Ni7pvxM7Z9cZ"
+            , Attr.class "w-full bg-gray-200 shadow-lg rounded-xl overflow-hidden aspect-9/16"
+            , Attr.style "width" "100%"
+            , Attr.style "height" "700px"
+            , Attr.title "YouTube video player"
+            , Attr.attribute "frameborder" "0"
+            , Attr.attribute "allow" "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            , Attr.attribute "referrerpolicy" "strict-origin-when-cross-origin"
+            , Attr.attribute "allowfullscreen" ""
+            ]
+            []
+        ]
