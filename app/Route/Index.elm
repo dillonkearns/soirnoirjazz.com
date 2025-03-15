@@ -288,13 +288,7 @@ eventsSection zone =
 eventView : Time.Zone -> Event -> Html msg
 eventView zone event =
     Html.li [ Attr.class "relative flex gap-x-6 py-6 xl:static" ]
-        [ --Html.img
-          --    [ Attr.src event.imageUrl
-          --    , Attr.class "size-14 flex-none rounded-full"
-          --    , Attr.alt ""
-          --    ]
-          --    [],
-          Html.div [ Attr.class "flex-auto" ]
+        [ Html.div [ Attr.class "flex-auto" ]
             [ Html.h3 [ Attr.class "pr-10 font-semibold text-gray-900 xl:pr-0" ]
                 [ Html.a
                     (case event.ticketUrl of
@@ -359,6 +353,15 @@ eventView zone event =
                         [ Html.a [ Attr.href event.location.googleMapsUrl ]
                             [ Html.text event.location.name
                             ]
+                        ]
+                    ]
+                , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-gray-400/50 xl:pl-3.5" ]
+                    [ Html.a
+                        [ Attr.href (Event.addToGoogleCalendarUrl zone event)
+                        , Attr.class "inline-flex items-center gap-x-2 rounded-md border border-indigo-600 px-4 py-2 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        , Attr.target "_blank"
+                        ]
+                        [ Html.text "Add to Google Calendar"
                         ]
                     ]
                 ]
@@ -482,6 +485,7 @@ soho : Venue
 soho =
     { name = "SOhO Restaurant & Music Club"
     , googleMapsUrl = "https://maps.app.goo.gl/hE8SL3xcRVzJUBe46"
+    , googleMapsNameWithAddress = "SOhO Restaurant & Music Club, 1221 State St STE 205, Santa Barbara, CA 93101, USA"
     , webSite = Nothing
     }
 
@@ -490,6 +494,7 @@ foxWine : Venue
 foxWine =
     { name = "Fox Wine Co."
     , googleMapsUrl = "https://maps.app.goo.gl/ToVrHzafPSpB3dSQ8"
+    , googleMapsNameWithAddress = "Fox Wine Co., 120 Santa Barbara St, Santa Barbara, CA 93101, USA"
     , webSite = Nothing
     }
 

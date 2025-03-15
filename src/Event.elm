@@ -1,8 +1,8 @@
-module Event exposing (Event, Venue, addToGoogleCalendarUrl, baseUrl)
+module Event exposing (Event, Venue, addToGoogleCalendarUrl)
 
-import DateFormat exposing (Token(..), format)
+import DateFormat
 import Time exposing (Posix, Zone)
-import Url.Builder exposing (absolute)
+import Url
 
 
 type alias Event =
@@ -17,56 +17,44 @@ type alias Event =
 type alias Venue =
     { name : String
     , googleMapsUrl : String
+    , googleMapsNameWithAddress : String
     , webSite : Maybe String -- if the venue has a web site
     }
+
+
+formatGoogleTime : Time.Zone -> Time.Posix -> String
+formatGoogleTime zone posix =
+    DateFormat.format
+        [ DateFormat.yearNumber
+        , DateFormat.monthFixed
+        , DateFormat.dayOfMonthFixed
+        , DateFormat.text "T"
+        , DateFormat.hourMilitaryFixed
+        , DateFormat.minuteFixed
+        , DateFormat.secondFixed
+        ]
+        zone
+        posix
 
 
 addToGoogleCalendarUrl : Time.Zone -> Event -> String
 addToGoogleCalendarUrl zone event =
     let
-        formatTime : Time.Posix -> String
-        formatTime =
-            format
-                [ DateFormat.yearNumber
-                , DateFormat.monthFixed
-                , DateFormat.dayOfMonthFixed
-                , DateFormat.text "T"
-                , DateFormat.hourMilitaryFixed
-                , DateFormat.minuteFixed
-                , DateFormat.secondFixed
-                ]
-                zone
-
-        formattedStart : String
-        formattedStart =
-            formatTime event.dateTimeStart
-
-        formattedEnd : String
-        formattedEnd =
-            formatTime event.dateTimeEnd
-
         detailsParam =
-            event.ticketUrl
-                |> Maybe.map
-                    (\url ->
-                        [ Url.Builder.string
-                            "details"
-                            ("More info: " ++ url)
-                        ]
-                    )
-                |> Maybe.withDefault []
+            case event.ticketUrl of
+                Just url ->
+                    "&details=" ++ Url.percentEncode ("More info: " ++ url)
 
-        params =
-            [ Url.Builder.string "action" "TEMPLATE"
-            , Url.Builder.string "text" event.name
-            , Url.Builder.string "dates" (formattedStart ++ "/" ++ formattedEnd)
-            , Url.Builder.string "location" event.location.name
-            ]
-                ++ detailsParam
+                Nothing ->
+                    ""
     in
-    absolute [ baseUrl ] params
-
-
-baseUrl : String
-baseUrl =
-    "https://calendar.google.com/calendar/render"
+    "https://calendar.google.com/calendar/render?action=TEMPLATE"
+        ++ "&text="
+        ++ Url.percentEncode event.name
+        ++ "&dates="
+        ++ formatGoogleTime zone event.dateTimeStart
+        ++ "/"
+        ++ formatGoogleTime zone event.dateTimeEnd
+        ++ "&location="
+        ++ Url.percentEncode event.location.googleMapsNameWithAddress
+        ++ detailsParam
