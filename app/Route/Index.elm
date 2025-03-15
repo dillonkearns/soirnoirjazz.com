@@ -1,6 +1,9 @@
 module Route.Index exposing (ActionData, Data, Model, Msg, route)
 
 import BackendTask exposing (BackendTask)
+import DateFormat
+import Effect exposing (Effect)
+import Event exposing (Event, Venue)
 import FatalError exposing (FatalError)
 import Footer
 import Head
@@ -10,20 +13,23 @@ import Html.Attributes as Attr
 import Pages.Url
 import PagesMsg exposing (PagesMsg)
 import Route
-import RouteBuilder exposing (App, StatelessRoute)
+import RouteBuilder exposing (App, StatefulRoute, StatelessRoute)
 import Shared
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr
+import Task
+import Time
 import UrlPath
 import View exposing (View)
 
 
 type alias Model =
-    {}
+    { zone : Time.Zone
+    }
 
 
-type alias Msg =
-    ()
+type Msg
+    = GotTimezone Time.Zone
 
 
 type alias RouteParams =
@@ -39,13 +45,41 @@ type alias ActionData =
     {}
 
 
-route : StatelessRoute RouteParams Data ActionData
+route : StatefulRoute RouteParams Data ActionData Model Msg
 route =
     RouteBuilder.single
         { head = head
         , data = data
         }
-        |> RouteBuilder.buildNoState { view = view }
+        |> RouteBuilder.buildWithLocalState
+            { view = view
+            , init = init
+            , subscriptions = \_ _ _ _ -> Sub.none
+            , update = update
+            }
+
+
+init :
+    App Data ActionData RouteParams
+    -> Shared.Model
+    -> ( Model, Effect Msg )
+init app shared =
+    ( { zone = Time.utc
+      }
+    , Effect.fromCmd (Time.here |> Task.perform GotTimezone)
+    )
+
+
+update :
+    App Data ActionData RouteParams
+    -> Shared.Model
+    -> Msg
+    -> Model
+    -> ( Model, Effect Msg )
+update app shared msg model =
+    case msg of
+        GotTimezone zone ->
+            ( { model | zone = zone }, Effect.none )
 
 
 data : BackendTask FatalError Data
@@ -78,8 +112,9 @@ head app =
 view :
     App Data ActionData RouteParams
     -> Shared.Model
+    -> Model
     -> View (PagesMsg Msg)
-view app shared =
+view app shared model =
     { title = "Dillon Kearns - Santa Barbara Jazz Pianist"
     , body =
         [ Html.div
@@ -175,7 +210,7 @@ view app shared =
                 ]
             ]
         , videoSection
-        , eventsSection
+        , eventsSection model.zone
         , Footer.footer True
         ]
     }
@@ -231,8 +266,8 @@ videoSection =
         ]
 
 
-eventsSection : Html msg
-eventsSection =
+eventsSection : Time.Zone -> Html msg
+eventsSection zone =
     div
         [ Attr.class "mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8" ]
         [ div
@@ -245,24 +280,13 @@ eventsSection =
             ]
         , div
             [ Attr.class "mx-auto mt-8 max-w-2xl sm:mt-20 lg:mt-12 lg:max-w-none" ]
-            [ eventsView
+            [ eventsView zone
             ]
         ]
 
 
-type alias Event =
-    { name : String
-    , imageUrl : String
-    , dateTime : String
-    , timeRange : String
-    , dateTimeISO : String
-    , location : Venue
-    , eventLink : Maybe String
-    }
-
-
-eventView : Event -> Html msg
-eventView event =
+eventView : Time.Zone -> Event -> Html msg
+eventView zone event =
     Html.li [ Attr.class "relative flex gap-x-6 py-6 xl:static" ]
         [ --Html.img
           --    [ Attr.src event.imageUrl
@@ -273,7 +297,7 @@ eventView event =
           Html.div [ Attr.class "flex-auto" ]
             [ Html.h3 [ Attr.class "pr-10 font-semibold text-gray-900 xl:pr-0" ]
                 [ Html.a
-                    (case event.eventLink of
+                    (case event.ticketUrl of
                         Just url ->
                             [ Attr.href url
                             , Attr.attribute "target" "_blank"
@@ -290,18 +314,49 @@ eventView event =
                     [ Html.dt [ Attr.class "mt-0.5" ]
                         [ calendarIcon
                         ]
-                    , Html.dd [] [ Html.time [ Attr.datetime event.dateTimeISO ] [ Html.text event.dateTime ] ]
+                    , Html.dd []
+                        [ Html.time
+                            [-- TODO
+                             --Attr.datetime
+                             --    event.dateTimeISO
+                            ]
+                            [ Html.text
+                                --"Sunday, March 27"
+                                --event.dateTime
+                                (DateFormat.format
+                                    [ DateFormat.dayOfWeekNameAbbreviated
+                                    , DateFormat.text ", "
+                                    , DateFormat.monthNameAbbreviated
+                                    , DateFormat.text " "
+                                    , DateFormat.dayOfMonthNumber
+                                    ]
+                                    zone
+                                    event.dateTimeStart
+                                )
+                            ]
+                        ]
                     ]
                 , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-gray-400/50 xl:pl-3.5" ]
                     [ Html.dt [ Attr.class "mt-0.5" ]
                         [ clockIcon ]
-                    , Html.dd [] [ Html.time [ Attr.datetime event.dateTimeISO ] [ Html.text event.timeRange ] ]
+                    , Html.dd []
+                        [ Html.time
+                            [-- TODO
+                             --Attr.datetime event.dateTimeISO
+                            ]
+                            [ Html.text
+                                (formatTime zone event.dateTimeStart
+                                    ++ " - "
+                                    ++ formatTime zone event.dateTimeEnd
+                                )
+                            ]
+                        ]
                     ]
                 , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-gray-400/50 xl:pl-3.5" ]
                     [ Html.dt [ Attr.class "mt-0.5" ]
                         [ mapIcon ]
                     , Html.dd []
-                        [ Html.a [ Attr.href event.location.googleMaps ]
+                        [ Html.a [ Attr.href event.location.googleMapsUrl ]
                             [ Html.text event.location.name
                             ]
                         ]
@@ -309,6 +364,19 @@ eventView event =
                 ]
             ]
         ]
+
+
+formatTime : Time.Zone -> Time.Posix -> String
+formatTime zone dateTime =
+    DateFormat.format
+        [ DateFormat.hourFixed
+        , DateFormat.text ":"
+        , DateFormat.minuteFixed
+        , DateFormat.text " "
+        , DateFormat.amPmLowercase
+        ]
+        zone
+        dateTime
 
 
 calendarIcon : Html msg
@@ -364,37 +432,37 @@ mapIcon =
 -- Event List View
 
 
-eventsView : Html msg
-eventsView =
+eventsView : Time.Zone -> Html msg
+eventsView zone =
     Html.ol [ Attr.class "mt-4 divide-y divide-gray-100 text-sm/6 lg:col-span-7 xl:col-span-8" ]
-        [ eventView
+        [ eventView zone
             { name = "Dillon Kearns & Brandon Kinalele Piano and Guitar Duo"
-            , imageUrl = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            , dateTime = "Sunday, March 27"
-            , timeRange = "5:00PM - 7:00PM"
-            , dateTimeISO = "2025-01-10T17:00"
+            , dateTimeStart = Time.millisToPosix 1743120000000
+            , dateTimeEnd =
+                Time.millisToPosix (1743120000000 + twoHours)
             , location = foxWine
-            , eventLink = Nothing
+            , ticketUrl = Nothing
             }
-        , eventView
+        , eventView zone
             { name = "SBCC Lunch Break Big Band"
-            , imageUrl = "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?crop=faces&fit=crop&h=256&w=256"
-            , dateTime = "Monday, April 14"
-            , timeRange = "7:00pm"
-            , dateTimeISO = "2022-02-15T15:00"
+            , dateTimeStart = Time.millisToPosix 1744682400000
+            , dateTimeEnd =
+                Time.millisToPosix (1744682400000 + twoHours)
             , location = soho
-            , eventLink = Just "https://www.sohosb.com/events/sbcc-student-big-band-soho-santabarbara-4"
+            , ticketUrl = Just "https://www.sohosb.com/events/sbcc-student-big-band-soho-santabarbara-4"
             }
         ]
+
+
+twoHours : Int
+twoHours =
+    2 * 60 * 60 * 1000
 
 
 googleDriveEmbed : String -> Html msg
 googleDriveEmbed driveId =
     Html.div
-        [ --Attr.style "height" "640px"
-          --, Attr.style "width" "100%"
-          --,
-          Attr.class "flex max-w-sm"
+        [ Attr.class "flex max-w-sm"
         ]
         [ Html.iframe
             [ Attr.src <|
@@ -410,23 +478,19 @@ googleDriveEmbed driveId =
         ]
 
 
-type alias Venue =
-    { name : String
-    , googleMaps : String
-    }
-
-
 soho : Venue
 soho =
     { name = "SOhO Restaurant & Music Club"
-    , googleMaps = "https://maps.app.goo.gl/hE8SL3xcRVzJUBe46"
+    , googleMapsUrl = "https://maps.app.goo.gl/hE8SL3xcRVzJUBe46"
+    , webSite = Nothing
     }
 
 
 foxWine : Venue
 foxWine =
     { name = "Fox Wine Co."
-    , googleMaps = "https://maps.app.goo.gl/ToVrHzafPSpB3dSQ8"
+    , googleMapsUrl = "https://maps.app.goo.gl/ToVrHzafPSpB3dSQ8"
+    , webSite = Nothing
     }
 
 
