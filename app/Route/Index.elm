@@ -199,11 +199,13 @@ videoEmbed videoId =
     div
         [ Attr.class "w-full aspect-video bg-gray-200 shadow-lg rounded-xl overflow-hidden" ]
         [ iframe
-            [ Attr.class "w-full h-full"
-            , Attr.src ("https://www.youtube.com/embed/" ++ videoId)
+            [ --Attr.class "w-full h-full"
+              Attr.src ("https://www.youtube.com/embed/" ++ videoId)
             , Attr.attribute "frameborder" "0"
             , Attr.attribute "allow" "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             , Attr.attribute "allowfullscreen" "true"
+            , Attr.style "width" "100%"
+            , Attr.style "height" "700px"
             ]
             []
         ]
