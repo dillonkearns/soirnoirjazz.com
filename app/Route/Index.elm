@@ -59,11 +59,11 @@ head :
     App Data ActionData RouteParams
     -> List Head.Tag
 head app =
-    Seo.summary
+    Seo.summaryLarge
         { canonicalUrlOverride = Nothing
         , siteName = "Dillon Kearns - Santa Barbara Jazz Pianist"
         , image =
-            { url = [ "keyboard.svg" ] |> UrlPath.join |> Pages.Url.fromPath
+            { url = "https://res.cloudinary.com/dillonkearns/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1742066379/hero-color_oh0rng.jpg" |> Pages.Url.external
             , alt = "Dillon Kearns"
             , dimensions = Nothing
             , mimeType = Nothing

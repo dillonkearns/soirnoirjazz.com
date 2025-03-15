@@ -11,8 +11,10 @@ import Effect
 import FatalError
 import Footer
 import Head
+import Head.Seo as Seo
 import Html exposing (Html)
 import Html.Attributes as Attr
+import Pages.Url
 import PagesMsg
 import Route
 import RouteBuilder
@@ -87,7 +89,20 @@ data =
 
 head : RouteBuilder.App Data ActionData RouteParams -> List Head.Tag
 head app =
-    []
+    Seo.summaryLarge
+        { canonicalUrlOverride = Nothing
+        , siteName = "Dillon Kearns - Santa Barbara Jazz Pianist"
+        , image =
+            { url = "https://res.cloudinary.com/dillonkearns/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1742066379/hero-color_oh0rng.jpg" |> Pages.Url.external
+            , alt = "Dillon Kearns"
+            , dimensions = Nothing
+            , mimeType = Nothing
+            }
+        , description = "Dillon Kearns Jazz Piano"
+        , locale = Nothing
+        , title = "Dillon Kearns - Santa Barbara Jazz Pianist"
+        }
+        |> Seo.website
 
 
 view :
