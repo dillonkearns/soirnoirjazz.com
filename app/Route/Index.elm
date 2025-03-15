@@ -1,7 +1,5 @@
 module Route.Index exposing (ActionData, Data, Model, Msg, route)
 
---import Html
-
 import BackendTask exposing (BackendTask)
 import FatalError exposing (FatalError)
 import Footer
@@ -77,25 +75,14 @@ head app =
         |> Seo.website
 
 
-pianoPhotoId =
-    --"photo-1596671516605-c14a1f351c33"
-    "photo-1545873494-055618a61ab1"
-
-
 view :
     App Data ActionData RouteParams
     -> Shared.Model
     -> View (PagesMsg Msg)
 view app shared =
-    { title = "elm-pages is running"
+    { title = "Dillon Kearns - Santa Barbara Jazz Pianist"
     , body =
-        [ -- Html.h1 [] [ Html.text "elm-pages is up and running!" ]
-          --, Html.p []
-          --    [ Html.text <| "The message is: " ++ app.data.message
-          --    ]
-          --, Route.Blog__Slug_ { slug = "hello" }
-          --    |> Route.link [] [ Html.text "My blog post" ]
-          Html.div
+        [ Html.div
             [ Attr.class "relative bg-white"
             ]
             [ Html.div
@@ -233,9 +220,12 @@ videoSection =
                   -- single centered item for now
                   Attr.class "grid max-w-xl grid-cols-1 gap-x-8 gap-y-12 lg:max-w-none grid-cols-1 place-items-center"
                 ]
-                [ googleDriveEmbed "1g1xZb8DNxnxHMQ5kzd6idQkEhJ-O4q7U"
+                [ --googleDriveEmbed "1g1xZb8DNxnxHMQ5kzd6idQkEhJ-O4q7U"
+                  --videoEmbed "8c0uz2FoKS8"
+                  --videoEmbed "9wXe_-JZu5A"
+                  video1
 
-                --videoEmbed "8c0uz2FoKS8"
+                --https://youtu.be/9wXe_-JZu5A
                 ]
             ]
         ]
@@ -401,17 +391,18 @@ eventsView =
 googleDriveEmbed : String -> Html msg
 googleDriveEmbed driveId =
     Html.div
-        [ Attr.style "height" "640px"
-        , Attr.style "width" "100%"
-        , Attr.class "flex max-w-sm"
+        [ --Attr.style "height" "640px"
+          --, Attr.style "width" "100%"
+          --,
+          Attr.class "flex max-w-sm"
         ]
         [ Html.iframe
             [ Attr.src <|
                 "https://drive.google.com/file/d/"
                     ++ driveId
                     ++ "/preview"
-            , Attr.style "height" "640px"
             , Attr.style "width" "100%"
+            , Attr.style "height" "480px"
             , Attr.attribute "allow" "autoplay"
             , Attr.attribute "allowFullScreen" "true"
             ]
@@ -437,3 +428,18 @@ foxWine =
     { name = "Fox Wine Co."
     , googleMaps = "https://maps.app.goo.gl/ToVrHzafPSpB3dSQ8"
     }
+
+
+video1 : Html msg
+video1 =
+    Html.iframe
+        [ Attr.width 560
+        , Attr.height 315
+        , Attr.src "https://www.youtube.com/embed/9wXe_-JZu5A?si=tnr0Ni7pvxM7Z9cZ"
+        , Attr.title "YouTube video player"
+        , Attr.attribute "frameborder" "0"
+        , Attr.attribute "allow" "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        , Attr.attribute "referrerpolicy" "strict-origin-when-cross-origin"
+        , Attr.attribute "allowfullscreen" ""
+        ]
+        []
