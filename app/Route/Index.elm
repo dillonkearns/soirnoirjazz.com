@@ -1,6 +1,7 @@
 module Route.Index exposing (ActionData, Data, Model, Msg, route)
 
 import BackendTask exposing (BackendTask)
+import Cloudinary
 import DateFormat
 import Effect exposing (Effect)
 import Event exposing (Event, Venue)
@@ -201,7 +202,12 @@ view app shared model =
                 , Html.div
                     [ Attr.class "relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0"
                     ]
-                    [ responsiveImg
+                    [ Cloudinary.responsiveImg
+                        { altText = "Dillon Kearns"
+                        , cloudinaryId = "v1742066379/hero-color_oh0rng.jpg"
+                        , cssClass = "aspect-3/2 w-full bg-gray-50 object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
+                        , baseSize = 1000
+                        }
                     ]
                 ]
             ]
@@ -210,28 +216,6 @@ view app shared model =
         , Footer.footer True
         ]
     }
-
-
-imageUrl : String -> Int -> String
-imageUrl baseUrl width =
-    baseUrl ++ "/f_auto,q_auto:good,c_scale,w_" ++ String.fromInt width ++ "/v1742066379/hero-color_oh0rng.jpg"
-
-
-srcsetAttr : String -> List Int -> String
-srcsetAttr baseUrl widths =
-    String.join ", " (List.map (\w -> imageUrl baseUrl w ++ " " ++ String.fromInt w ++ "w") widths)
-
-
-responsiveImg : Html msg
-responsiveImg =
-    Html.img
-        [ Attr.class "aspect-3/2 w-full bg-gray-50 object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
-        , Attr.src (imageUrl "https://res.cloudinary.com/dillonkearns/image/upload" 400) -- Default for mobile fallback
-        , Attr.attribute "srcset" (srcsetAttr "https://res.cloudinary.com/dillonkearns/image/upload" [ 320, 500, 990, 1500 ])
-        , Attr.attribute "sizes" "(max-width: 480px) 100vw, (max-width: 1024px) 100vw, 50vw"
-        , Attr.alt "Dillon Kearns"
-        ]
-        []
 
 
 videoEmbed : String -> Html msg
