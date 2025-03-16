@@ -130,10 +130,11 @@ view app shared model =
                         [ Attr.class "mx-auto max-w-lg lg:mx-0"
                         ]
                         [ Html.img
-                            --[ Attr.class "h-11"
                             [ Attr.class "h-8"
-                            , Attr.src "https://svgsilh.com/svg/25711.svg"
-                            , Attr.alt "Your Company"
+                            , Attr.src "/keyboard.svg"
+                            , Attr.width 51
+                            , Attr.height 32
+                            , Attr.alt "Dillon KearnsJazz Piano"
                             ]
                             []
                         , Html.div
@@ -290,16 +291,17 @@ eventView zone event =
     Html.li [ Attr.class "relative flex gap-x-6 py-6 xl:static" ]
         [ Html.div [ Attr.class "flex-auto" ]
             [ Html.h3 [ Attr.class "pr-10 font-semibold text-gray-900 xl:pr-0" ]
-                [ Html.a
-                    (case event.ticketUrl of
-                        Just url ->
+                [ (case event.ticketUrl of
+                    Just url ->
+                        Html.a
                             [ Attr.href url
                             , Attr.attribute "target" "_blank"
                             ]
 
-                        Nothing ->
+                    Nothing ->
+                        Html.span
                             []
-                    )
+                  )
                     [ Html.text event.name
                     ]
                 ]
