@@ -73,13 +73,6 @@ eventsDecoder =
 recordDecoder : Decoder Event
 recordDecoder =
     let
-        decodeVenue : String -> String -> Venue
-        decodeVenue venueName googleMapsNameWithAddress =
-            { name = venueName
-            , googleMapsNameWithAddress = googleMapsNameWithAddress
-            , webSite = Nothing -- TODO
-            }
-
         decodeEndTime : Posix -> Int -> Posix
         decodeEndTime startTime durationSecs =
             Time.millisToPosix (Time.posixToMillis startTime + (durationSecs * 1000))
