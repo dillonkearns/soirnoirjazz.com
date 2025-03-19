@@ -91,10 +91,15 @@ recordDecoder =
             (Decode.field "Start Date/Time" Iso8601.decoder)
             (Decode.field "Duration" Decode.int)
         )
-        (Decode.map2 decodeVenue
-            (Decode.field "Venue Name" (Decode.index 0 Decode.string))
-            (Decode.field "Google Maps Location" (Decode.index 0 Decode.string))
-        )
+        venueDecoder
+        (Decode.succeed Nothing {- TODO -})
+
+
+venueDecoder : Decoder Venue
+venueDecoder =
+    Decode.map3 Venue
+        (Decode.field "Venue Name" (Decode.index 0 Decode.string))
+        (Decode.field "Google Maps Location" (Decode.index 0 Decode.string))
         (Decode.succeed Nothing {- TODO -})
 
 
