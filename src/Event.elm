@@ -72,15 +72,14 @@ eventsDecoder =
 
 recordDecoder : Decoder Event
 recordDecoder =
-    let
-        decodeEndTime : Posix -> Int -> Posix
-        decodeEndTime startTime durationSecs =
-            Time.millisToPosix (Time.posixToMillis startTime + (durationSecs * 1000))
-    in
     Decode.map5 Event
         (Decode.field "Event Title" Decode.string)
         (Decode.field "Start Date/Time" Iso8601.decoder)
-        (Decode.map2 decodeEndTime
+        (Decode.map2
+            (\startTime durationSecs ->
+                Time.millisToPosix
+                    (Time.posixToMillis startTime + (durationSecs * 1000))
+            )
             (Decode.field "Start Date/Time" Iso8601.decoder)
             (Decode.field "Duration" Decode.int)
         )
