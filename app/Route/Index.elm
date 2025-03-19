@@ -20,7 +20,6 @@ import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr
 import Task
 import Time
-import UrlPath
 import View exposing (View)
 
 
@@ -38,7 +37,7 @@ type alias RouteParams =
 
 
 type alias Data =
-    { message : String
+    { events : List Event
     }
 
 
@@ -87,7 +86,7 @@ data : BackendTask FatalError Data
 data =
     BackendTask.succeed Data
         |> BackendTask.andMap
-            (BackendTask.succeed "Hello!")
+            Event.getEvents
 
 
 head :
@@ -212,7 +211,7 @@ view app shared model =
                 ]
             ]
         , videoSection
-        , eventsSection model.zone
+        , eventsSection app.data.events model.zone
         , Footer.footer True
         ]
     }
@@ -268,8 +267,8 @@ videoSection =
         ]
 
 
-eventsSection : Time.Zone -> Html msg
-eventsSection zone =
+eventsSection : List Event -> Time.Zone -> Html msg
+eventsSection events zone =
     div
         [ Attr.class "mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8" ]
         [ div
@@ -282,7 +281,7 @@ eventsSection zone =
             ]
         , div
             [ Attr.class "mx-auto mt-8 max-w-2xl sm:mt-20 lg:mt-12 lg:max-w-none" ]
-            [ eventsView zone
+            [ eventsView events zone
             ]
         ]
 
@@ -353,7 +352,10 @@ eventView zone event =
                     [ Html.dt [ Attr.class "mt-0.5" ]
                         [ mapIcon ]
                     , Html.dd []
-                        [ Html.a [ Attr.href event.location.googleMapsUrl ]
+                        [ Html.a
+                            [ Attr.href (Event.googleMapsUrl event)
+                            , Attr.target "_blank"
+                            ]
                             [ Html.text event.location.name
                             ]
                         ]
@@ -434,30 +436,10 @@ mapIcon =
         ]
 
 
-
--- Event List View
-
-
-eventsView : Time.Zone -> Html msg
-eventsView zone =
+eventsView : List Event -> Time.Zone -> Html msg
+eventsView events zone =
     Html.ol [ Attr.class "mt-4 divide-y divide-gray-100 text-sm/6 lg:col-span-7 xl:col-span-8" ]
-        [ eventView zone
-            { name = "Dillon Kearns & Brandon Kinalele Piano and Guitar Duo"
-            , dateTimeStart = Time.millisToPosix 1743120000000
-            , dateTimeEnd =
-                Time.millisToPosix (1743120000000 + twoHours)
-            , location = foxWine
-            , ticketUrl = Nothing
-            }
-        , eventView zone
-            { name = "SBCC Lunch Break Big Band"
-            , dateTimeStart = Time.millisToPosix 1744682400000
-            , dateTimeEnd =
-                Time.millisToPosix (1744682400000 + twoHours)
-            , location = soho
-            , ticketUrl = Just "https://www.sohosb.com/events/sbcc-student-big-band-soho-santabarbara-4"
-            }
-        ]
+        (List.map (eventView zone) events)
 
 
 twoHours : Int
@@ -482,24 +464,6 @@ googleDriveEmbed driveId =
             ]
             []
         ]
-
-
-soho : Venue
-soho =
-    { name = "SOhO Restaurant & Music Club"
-    , googleMapsUrl = "https://maps.app.goo.gl/hE8SL3xcRVzJUBe46"
-    , googleMapsNameWithAddress = "SOhO Restaurant & Music Club, 1221 State St STE 205, Santa Barbara, CA 93101, USA"
-    , webSite = Nothing
-    }
-
-
-foxWine : Venue
-foxWine =
-    { name = "Fox Wine Co."
-    , googleMapsUrl = "https://maps.app.goo.gl/ToVrHzafPSpB3dSQ8"
-    , googleMapsNameWithAddress = "Fox Wine Co., 120 Santa Barbara St, Santa Barbara, CA 93101, USA"
-    , webSite = Nothing
-    }
 
 
 video1 : Html msg
