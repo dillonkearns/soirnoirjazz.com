@@ -67,7 +67,7 @@ addToGoogleCalendarUrl zone event =
 
 eventsDecoder : Decoder (List Event)
 eventsDecoder =
-    Decode.field "records" (Decode.list recordDecoder)
+    Decode.field "records" (Decode.list (Decode.field "fields" recordDecoder))
 
 
 recordDecoder : Decoder Event
@@ -85,15 +85,15 @@ recordDecoder =
             Time.millisToPosix (Time.posixToMillis startTime + (durationSecs * 1000))
     in
     Decode.map5 Event
-        (Decode.field "fields" (Decode.field "Event Title" Decode.string))
-        (Decode.field "fields" (Decode.field "Start Date/Time" Iso8601.decoder))
+        (Decode.field "Event Title" Decode.string)
+        (Decode.field "Start Date/Time" Iso8601.decoder)
         (Decode.map2 decodeEndTime
-            (Decode.field "fields" (Decode.field "Start Date/Time" Iso8601.decoder))
-            (Decode.field "fields" (Decode.field "Duration" Decode.int))
+            (Decode.field "Start Date/Time" Iso8601.decoder)
+            (Decode.field "Duration" Decode.int)
         )
         (Decode.map2 decodeVenue
-            (Decode.field "fields" (Decode.field "Venue Name" (Decode.index 0 Decode.string)))
-            (Decode.field "fields" (Decode.field "Google Maps Location" (Decode.index 0 Decode.string)))
+            (Decode.field "Venue Name" (Decode.index 0 Decode.string))
+            (Decode.field "Google Maps Location" (Decode.index 0 Decode.string))
         )
         (Decode.succeed Nothing {- TODO -})
 
