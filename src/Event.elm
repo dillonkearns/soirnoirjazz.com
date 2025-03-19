@@ -75,16 +75,20 @@ recordDecoder =
     Decode.map5 Event
         (Decode.field "Event Title" Decode.string)
         (Decode.field "Start Date/Time" Iso8601.decoder)
-        (Decode.map2
-            (\startTime durationSecs ->
-                Time.millisToPosix
-                    (Time.posixToMillis startTime + (durationSecs * 1000))
-            )
-            (Decode.field "Start Date/Time" Iso8601.decoder)
-            (Decode.field "Duration" Decode.int)
-        )
+        endTimeDecoder
         venueDecoder
         (Decode.succeed Nothing {- TODO -})
+
+
+endTimeDecoder : Decoder Posix
+endTimeDecoder =
+    Decode.map2
+        (\startTime durationSecs ->
+            Time.millisToPosix
+                (Time.posixToMillis startTime + (durationSecs * 1000))
+        )
+        (Decode.field "Start Date/Time" Iso8601.decoder)
+        (Decode.field "Duration" Decode.int)
 
 
 venueDecoder : Decoder Venue
