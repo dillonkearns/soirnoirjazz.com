@@ -106,7 +106,7 @@ getEvents =
         |> BackendTask.andThen
             (\airTableToken ->
                 BackendTask.Http.getWithOptions
-                    { url = "https://api.airtable.com/v0/appNxan3bXZ81sXQn/Events?maxRecords=3&view=Grid%20view&maxRecords=10"
+                    { url = "https://api.airtable.com/v0/appNxan3bXZ81sXQn/Events?maxRecords=10&view=Upcoming%20Shows"
                     , timeoutInMs = Nothing
                     , retries = Nothing
                     , cachePath = Nothing
