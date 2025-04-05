@@ -117,8 +117,8 @@ view :
 view app shared model =
     { title = "Soir Noir - Santa Barbara Jazz Band"
     , body =
-        [ Html.div
-            [ Attr.class "relative bg-white"
+        [ Html.div 
+            [ Attr.class "relative bg-noir-primary"
             ]
             [ Html.div
                 [ Attr.class "mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8"
@@ -130,7 +130,7 @@ view app shared model =
                         [ Attr.class "mx-auto max-w-lg lg:mx-0"
                         ]
                         [ Html.img
-                            [ Attr.class "h-8"
+                            [ Attr.class "h-8 invert brightness-75"
                             , Attr.src "/keyboard.svg"
                             , Attr.width 51
                             , Attr.height 32
@@ -141,12 +141,12 @@ view app shared model =
                             [ Attr.class "hidden sm:mt-32 sm:flex lg:mt-16"
                             ]
                             [ Html.div
-                                [ Attr.class "relative rounded-full px-3 py-1 text-sm/6 text-gray-500 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                                [ Attr.class "relative rounded-full px-3 py-1 text-sm/6 text-text-tertiary ring-1 ring-noir-border hover:ring-noir-hover"
                                 ]
                                 [ Html.text "  Next Event: Fox Wine Co., Sunday, March 23, 5:00–7:00 PM. "
                                 , Html.a
                                     [ Attr.href "#upcoming-shows"
-                                    , Attr.class "font-semibold whitespace-nowrap text-indigo-600"
+                                    , Attr.class "font-semibold whitespace-nowrap text-gold-primary hover:text-gold-light focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-primary"
                                     ]
                                     [ Html.span
                                         [ Attr.class "absolute inset-0"
@@ -162,19 +162,20 @@ view app shared model =
                                 ]
                             ]
                         , Html.h1
-                            [ Attr.class "mt-12 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:mt-10 sm:text-7xl"
+                            [ Attr.class "mt-12 text-5xl font-semibold tracking-tight text-pretty text-text-primary sm:mt-10 sm:text-7xl"
                             ]
                             [ Html.text "Soir Noir Jazz Band" ]
                         , Html.p
-                            [ Attr.class "mt-8 text-lg font-medium text-gray-600 sm:text-xl" ]
+                            [ Attr.class "mt-8 text-lg font-medium text-text-secondary sm:text-xl"
+                            ]
                             [ Html.text "Bringing sophistication and elegance to Santa Barbara's restaurants, wineries, bars, and private events with our unique jazz sound." ]
                         , Html.ul
-                            [ Attr.class "mt-6 space-y-1.5 text-lg text-gray-600 sm:text-xl" ]
-                            [ Html.li [ Attr.class "before:content-['•'] before:mr-1.5 before:text-indigo-500 font-normal" ]
+                            [ Attr.class "mt-6 space-y-1.5 text-lg text-text-secondary sm:text-xl" ]
+                            [ Html.li [ Attr.class "before:content-['•'] before:mr-1.5 before:text-gold-primary font-normal" ]
                                 [ Html.text "Intimate solo piano" ]
-                            , Html.li [ Attr.class "before:content-['•'] before:mr-1.5 before:text-indigo-500 font-normal" ]
+                            , Html.li [ Attr.class "before:content-['•'] before:mr-1.5 before:text-gold-primary font-normal" ]
                                 [ Html.text "Dynamic duos with Jazz vocalists and instrumentalists" ]
-                            , Html.li [ Attr.class "before:content-['•'] before:mr-1.5 before:text-indigo-500 font-normal" ]
+                            , Html.li [ Attr.class "before:content-['•'] before:mr-1.5 before:text-gold-primary font-normal" ]
                                 [ Html.text "Jazz combos" ]
                             ]
                         , Html.div
@@ -182,12 +183,12 @@ view app shared model =
                             ]
                             [ Route.Contact
                                 |> Route.link
-                                    [ Attr.class "rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    [ Attr.class "rounded-md bg-gold-primary px-3.5 py-2.5 text-sm font-semibold text-text-primary shadow-sm hover:bg-gold-dark focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-primary"
                                     ]
                                     [ Html.text "Inquire About Booking" ]
                             , Html.a
                                 [ Attr.href "#event-clips"
-                                , Attr.class "text-sm/6 font-semibold text-gray-900"
+                                , Attr.class "text-sm/6 font-semibold text-gold-light hover:text-gold-light focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-light"
                                 ]
                                 [ Html.text "See Event Clips "
                                 , Html.span
@@ -204,7 +205,7 @@ view app shared model =
                     [ Cloudinary.responsiveImg
                         { altText = "Soir Noir"
                         , cloudinaryId = "v1742066379/hero-color_oh0rng.jpg"
-                        , cssClass = "aspect-3/2 w-full bg-gray-50 object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
+                        , cssClass = "aspect-3/2 w-full bg-dark-surface object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
                         , baseSize = 1000
                         }
                     ]
@@ -241,28 +242,19 @@ videoSection =
         [ div
             [ Attr.class "mx-auto max-w-2xl lg:text-center" ]
             [ h2
-                [ Attr.class "text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl"
+                [ Attr.class "text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl"
                 , Attr.id "event-clips"
                 ]
                 [ text "Event Clips" ]
             , p
-                [ Attr.class "mt-6 text-lg text-gray-600" ]
+                [ Attr.class "mt-6 text-lg text-text-secondary" ]
                 [ text "Get a feel for the vibe with recent live clips." ]
             ]
         , div
             [ Attr.class "mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none" ]
             [ div
-                [ --Attr.class "grid max-w-xl grid-cols-1 gap-x-8 gap-y-12 lg:max-w-none lg:grid-cols-3"
-                  -- single centered item for now
-                  Attr.class "grid max-w-xl grid-cols-1 gap-x-8 gap-y-12 lg:max-w-none grid-cols-1 place-items-center"
-                ]
-                [ --googleDriveEmbed "1g1xZb8DNxnxHMQ5kzd6idQkEhJ-O4q7U"
-                  --videoEmbed "8c0uz2FoKS8"
-                  --videoEmbed "9wXe_-JZu5A"
-                  video1
-
-                --https://youtu.be/9wXe_-JZu5A
-                ]
+                [ Attr.class "grid max-w-xl grid-cols-1 gap-x-8 gap-y-12 lg:max-w-none grid-cols-1 place-items-center" ]
+                [ video1 ]
             ]
         ]
 
@@ -274,7 +266,7 @@ eventsSection events zone =
         [ div
             [ Attr.class "mx-auto max-w-2xl lg:text-center" ]
             [ h2
-                [ Attr.class "text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl"
+                [ Attr.class "text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl"
                 , Attr.id "upcoming-shows"
                 ]
                 [ text "Upcoming Shows" ]
@@ -290,7 +282,7 @@ eventView : Time.Zone -> Event -> Html msg
 eventView zone event =
     Html.li [ Attr.class "relative flex gap-x-6 py-6 xl:static" ]
         [ Html.div [ Attr.class "flex-auto" ]
-            [ Html.h3 [ Attr.class "pr-10 font-semibold text-gray-900 xl:pr-0" ]
+            [ Html.h3 [ Attr.class "pr-10 font-semibold text-text-primary xl:pr-0" ]
                 [ (case event.ticketUrl of
                     Just url ->
                         Html.a
@@ -305,7 +297,7 @@ eventView zone event =
                     [ Html.text event.name
                     ]
                 ]
-            , Html.dl [ Attr.class "mt-2 flex flex-col text-gray-500 xl:flex-row" ]
+            , Html.dl [ Attr.class "mt-2 flex flex-col text-text-tertiary xl:flex-row" ]
                 [ Html.div [ Attr.class "flex items-start gap-x-3" ]
                     [ Html.dt [ Attr.class "mt-0.5" ]
                         [ calendarIcon
@@ -317,8 +309,6 @@ eventView zone event =
                              --    event.dateTimeISO
                             ]
                             [ Html.text
-                                --"Sunday, March 27"
-                                --event.dateTime
                                 (DateFormat.format
                                     [ DateFormat.dayOfWeekNameAbbreviated
                                     , DateFormat.text ", "
@@ -332,14 +322,12 @@ eventView zone event =
                             ]
                         ]
                     ]
-                , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-gray-400/50 xl:pl-3.5" ]
+                , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-noir-border xl:pl-3.5" ]
                     [ Html.dt [ Attr.class "mt-0.5" ]
                         [ clockIcon ]
                     , Html.dd []
                         [ Html.time
-                            [-- TODO
-                             --Attr.datetime event.dateTimeISO
-                            ]
+                            []
                             [ Html.text
                                 (formatTime zone event.dateTimeStart
                                     ++ " - "
@@ -348,22 +336,23 @@ eventView zone event =
                             ]
                         ]
                     ]
-                , Html.div [ Attr.class "min-w-3xs mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-gray-400/50 xl:pl-3.5" ]
+                , Html.div [ Attr.class "min-w-3xs mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-noir-border xl:pl-3.5" ]
                     [ Html.dt [ Attr.class "mt-0.5" ]
                         [ mapIcon ]
                     , Html.dd []
                         [ Html.a
                             [ Attr.href (Event.googleMapsUrl event)
                             , Attr.target "_blank"
+                            , Attr.class "text-text-secondary hover:text-text-primary"
                             ]
                             [ Html.text event.location.name
                             ]
                         ]
                     ]
-                , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-gray-400/50 xl:pl-3.5" ]
+                , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-noir-border xl:pl-3.5" ]
                     [ Html.a
                         [ Attr.href (Event.addToGoogleCalendarUrl zone event)
-                        , Attr.class "inline-flex items-center gap-x-2 rounded-md border border-indigo-600 px-4 py-2 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        , Attr.class "inline-flex items-center gap-x-2 rounded-md border border-gold-primary px-4 py-2 text-sm font-semibold text-gold-primary shadow-sm hover:bg-noir-secondary focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-primary"
                         , Attr.target "_blank"
                         ]
                         [ Html.text "Add to Google Calendar"
@@ -389,7 +378,7 @@ formatTime zone dateTime =
 
 calendarIcon : Html msg
 calendarIcon =
-    svg [ SvgAttr.class "size-5 text-gray-400 fill-indigo-600", SvgAttr.viewBox "0 0 20 20", SvgAttr.fill "currentColor" ]
+    svg [ SvgAttr.class "size-5 text-text-tertiary fill-gold-primary", SvgAttr.viewBox "0 0 20 20", SvgAttr.fill "currentColor" ]
         [ path [ SvgAttr.d "M5.75 2a.75.75 0 0 1 .75.75V4h7V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 18 6.75v8.5A2.75 2.75 0 0 1 15.25 18H4.75A2.75 2.75 0 0 1 2 15.25v-8.5A2.75 2.75 0 0 1 4.75 4H5V2.75A.75.75 0 0 1 5.75 2Zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75Z" ] []
         ]
 
@@ -401,7 +390,7 @@ clockIcon =
         , SvgAttr.viewBox "0 0 24 24"
         , SvgAttr.strokeWidth "1.5"
         , SvgAttr.stroke "currentColor"
-        , SvgAttr.class "size-6 text-indigo-600 w-5 h-5"
+        , SvgAttr.class "size-6 text-gold-primary w-5 h-5"
         ]
         [ path
             [ SvgAttr.strokeLinecap "round"
@@ -419,7 +408,7 @@ mapIcon =
         , SvgAttr.viewBox "0 0 24 24"
         , SvgAttr.strokeWidth "1.5"
         , SvgAttr.stroke "currentColor"
-        , SvgAttr.class "size-6 text-indigo-600 w-5 h-5"
+        , SvgAttr.class "size-6 text-gold-primary w-5 h-5"
         ]
         [ path
             [ SvgAttr.strokeLinecap "round"
@@ -438,7 +427,7 @@ mapIcon =
 
 eventsView : List Event -> Time.Zone -> Html msg
 eventsView events zone =
-    Html.ol [ Attr.class "mt-4 divide-y divide-gray-100 text-sm/6 lg:col-span-7 xl:col-span-8" ]
+    Html.ol [ Attr.class "mt-4 divide-y divide-noir-border text-sm/6 lg:col-span-7 xl:col-span-8" ]
         (List.map (eventView zone) events)
 
 

@@ -1,7 +1,39 @@
 @import "tailwindcss";
 @source "../node_modules/@my-company/ui-lib";
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+@theme {
+  /* Film noir palette with metallic gold accent */
+  --color-noir-primary: #121212;
+  --color-noir-secondary: #1e1e1e;
+  --color-noir-border: #2d2d2d;
+  --color-noir-hover: #404040;
+  
+  --color-gold-primary: #b77830;
+  --color-gold-light: #e6c992;
+  --color-gold-dark: #8c5a23;
+  
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #d1d5db;
+  --color-text-tertiary: #a0a0a0;
+}
+
+@layer base {
+  body {
+    @apply bg-noir-primary text-text-secondary;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+      sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+}
+
+/* Film noir style - add vignette effect to page */
+.vignette::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 15rem rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  z-index: 100;
 }
