@@ -14,7 +14,7 @@ type alias ImageConfig =
 
 imageUrl : String -> Int -> String
 imageUrl cloudinaryId width =
-    baseUrl ++ "/f_auto,q_auto:good,c_scale,w_" ++ String.fromInt width ++ "/" ++ cloudinaryId
+    baseUrl ++ "/f_auto,e_grayscale,q_auto:good,c_scale,w_" ++ String.fromInt width ++ "/" ++ cloudinaryId
 
 
 srcsetAttr : String -> List Int -> String
