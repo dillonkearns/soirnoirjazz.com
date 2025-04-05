@@ -95,16 +95,16 @@ head :
 head app =
     Seo.summaryLarge
         { canonicalUrlOverride = Nothing
-        , siteName = "Dillon Kearns - Santa Barbara Jazz Pianist"
+        , siteName = "Soir Noir - Santa Barbara Jazz Band"
         , image =
             { url = "https://res.cloudinary.com/dillonkearns/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1742066379/hero-color_oh0rng.jpg" |> Pages.Url.external
-            , alt = "Dillon Kearns"
+            , alt = "Soir Noir"
             , dimensions = Nothing
             , mimeType = Nothing
             }
-        , description = "Dillon Kearns Jazz Piano"
+        , description = "Soir Noir Jazz Band"
         , locale = Nothing
-        , title = "Dillon Kearns - Santa Barbara Jazz Pianist"
+        , title = "Soir Noir - Santa Barbara Jazz Band"
         }
         |> Seo.website
 
@@ -115,7 +115,7 @@ view :
     -> Model
     -> View (PagesMsg Msg)
 view app shared model =
-    { title = "Dillon Kearns - Santa Barbara Jazz Pianist"
+    { title = "Soir Noir - Santa Barbara Jazz Band"
     , body =
         [ Html.div
             [ Attr.class "relative bg-white"
@@ -134,7 +134,7 @@ view app shared model =
                             , Attr.src "/keyboard.svg"
                             , Attr.width 51
                             , Attr.height 32
-                            , Attr.alt "Dillon KearnsJazz Piano"
+                            , Attr.alt "Soir Noir Jazz Band"
                             ]
                             []
                         , Html.div
@@ -164,10 +164,10 @@ view app shared model =
                         , Html.h1
                             [ Attr.class "mt-12 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:mt-10 sm:text-7xl"
                             ]
-                            [ Html.text "Dillon Kearns Jazz Pianist" ]
+                            [ Html.text "Soir Noir Jazz Band" ]
                         , Html.p
                             [ Attr.class "mt-8 text-lg font-medium text-gray-600 sm:text-xl" ]
-                            [ Html.text "Adding charm and character to Santa Barbara’s restaurants, wineries, bars, and private events through timeless Jazz Standards." ]
+                            [ Html.text "Bringing sophistication and elegance to Santa Barbara's restaurants, wineries, bars, and private events with our unique jazz sound." ]
                         , Html.ul
                             [ Attr.class "mt-6 space-y-1.5 text-lg text-gray-600 sm:text-xl" ]
                             [ Html.li [ Attr.class "before:content-['•'] before:mr-1.5 before:text-indigo-500 font-normal" ]
@@ -202,7 +202,7 @@ view app shared model =
                     [ Attr.class "relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0"
                     ]
                     [ Cloudinary.responsiveImg
-                        { altText = "Dillon Kearns"
+                        { altText = "Soir Noir"
                         , cloudinaryId = "v1742066379/hero-color_oh0rng.jpg"
                         , cssClass = "aspect-3/2 w-full bg-gray-50 object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
                         , baseSize = 1000

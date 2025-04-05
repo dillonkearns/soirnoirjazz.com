@@ -91,16 +91,16 @@ head : RouteBuilder.App Data ActionData RouteParams -> List Head.Tag
 head app =
     Seo.summaryLarge
         { canonicalUrlOverride = Nothing
-        , siteName = "Dillon Kearns - Santa Barbara Jazz Pianist"
+        , siteName = "Soir Noir - Santa Barbara Jazz Band"
         , image =
             { url = "https://res.cloudinary.com/dillonkearns/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1742066379/hero-color_oh0rng.jpg" |> Pages.Url.external
-            , alt = "Dillon Kearns"
+            , alt = "Soir Noir"
             , dimensions = Nothing
             , mimeType = Nothing
             }
-        , description = "Dillon Kearns Jazz Piano"
+        , description = "Soir Noir Jazz Band"
         , locale = Nothing
-        , title = "Dillon Kearns - Santa Barbara Jazz Pianist"
+        , title = "Soir Noir - Santa Barbara Jazz Band"
         }
         |> Seo.website
 
@@ -111,7 +111,7 @@ view :
     -> Model
     -> View.View (PagesMsg.PagesMsg Msg)
 view app shared model =
-    { title = "Dillon Kearns Jazz Pianist Bookings & Contact"
+    { title = "Soir Noir Jazz Band Bookings & Contact"
     , body =
         [ header
         , contactFormNew
@@ -262,9 +262,9 @@ contactFormNew =
                             , Html.dd []
                                 [ Html.a
                                     [ Attr.class "hover:text-white"
-                                    , Attr.href "mailto:dillon@dillonkearns.com"
+                                    , Attr.href "mailto:info@soirnoirjazz.com"
                                     ]
-                                    [ Html.text "dillon@dillonkearns.com" ]
+                                    [ Html.text "info@soirnoirjazz.com" ]
                                 ]
                             ]
                         ]
@@ -451,7 +451,7 @@ header =
                     [ Html.h1
                         [ Attr.class "text-2xl font-bold text-gray-900"
                         ]
-                        [ Html.text "Dillon Kearns" ]
+                        [ Html.text "Soir Noir" ]
                     , Html.p
                         [ Attr.class "text-sm font-medium text-gray-500"
                         ]
@@ -460,7 +460,7 @@ header =
                             [ --Attr.href "#"
                               Attr.class "text-gray-900"
                             ]
-                            [ Html.text "Jazz Pianist" ]
+                            [ Html.text "Jazz Band" ]
                         ]
                     ]
                 ]

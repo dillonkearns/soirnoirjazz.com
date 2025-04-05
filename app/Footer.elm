@@ -90,7 +90,7 @@ innerThing =
               --        ]
               --    ],
               Html.a
-                [ Attr.href "http://instagram.com/dillonkearns"
+                [ Attr.href "http://instagram.com/soirnoirjazz"
                 , Attr.class "text-indigo-600 hover:text-indigo-400"
                 ]
                 [ Html.span
@@ -112,7 +112,7 @@ innerThing =
                     ]
                 ]
             , Html.a
-                [ Attr.href "mailto:dillon@dillonkearns.com"
+                [ Attr.href "mailto:info@soirnoirjazz.com"
                 , Attr.class "text-indigo-600 hover:text-indigo-400"
                 ]
                 [ Html.span
@@ -134,7 +134,7 @@ innerThing =
                 --    ]
                 ]
             , Html.a
-                [ Attr.href "https://www.youtube.com/@DillonKearns"
+                [ Attr.href "https://www.youtube.com/@SoirNoirJazz"
                 , Attr.target "_blank"
                 , Attr.class "text-indigo-600 hover:text-indigo-400"
                 ]
@@ -160,7 +160,7 @@ innerThing =
         , Html.p
             [ Attr.class "mt-8 text-sm/6 text-gray-600 md:order-1 md:mt-0"
             ]
-            [ Html.text "© 2025 Dillon Kearns All rights reserved." ]
+            [ Html.text "© 2025 Soir Noir All rights reserved." ]
         ]
 
 

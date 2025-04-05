@@ -8,7 +8,7 @@ import SiteConfig exposing (SiteConfig)
 
 config : SiteConfig
 config =
-    { canonicalUrl = "https://dillonkearns.com"
+    { canonicalUrl = "https://soirnoirjazz.com"
     , head = head
     }
 
