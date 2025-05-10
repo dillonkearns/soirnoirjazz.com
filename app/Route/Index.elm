@@ -117,7 +117,7 @@ view :
 view app shared model =
     { title = "Soir Noir - Santa Barbara Jazz Band"
     , body =
-        [ Html.div 
+        [ Html.div
             [ Attr.class "relative bg-noir-primary"
             ]
             [ Html.div
@@ -130,10 +130,13 @@ view app shared model =
                         [ Attr.class "mx-auto max-w-lg lg:mx-0"
                         ]
                         [ Html.img
-                            [ Attr.class "h-8 invert brightness-75"
-                            , Attr.src "/keyboard.svg"
-                            , Attr.width 51
-                            , Attr.height 32
+                            [ Attr.class "h-32 invert brightness-75"
+
+                            --, Attr.src "/keyboard.svg"
+                            , Attr.src "/glass.png"
+
+                            --, Attr.width 51
+                            --, Attr.height 51
                             , Attr.alt "Soir Noir Jazz Band"
                             ]
                             []
@@ -162,9 +165,9 @@ view app shared model =
                                 ]
                             ]
                         , Html.h1
-                            [ Attr.class "mt-12 text-5xl font-semibold tracking-tight text-pretty text-text-primary sm:mt-10 sm:text-7xl"
+                            [ Attr.class "mt-12 text-5xl font-semibold tracking-tight text-pretty text-text-primary sm:mt-10 sm:text-7xl font-[Limelight]"
                             ]
-                            [ Html.text "Soir Noir Jazz Band" ]
+                            [ Html.text "Soir Noir" ]
                         , Html.p
                             [ Attr.class "mt-8 text-lg font-medium text-text-secondary sm:text-xl"
                             ]

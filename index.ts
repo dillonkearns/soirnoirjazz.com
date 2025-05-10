@@ -1,3 +1,5 @@
+import '@fontsource/limelight';
+
 type ElmPagesInit = {
   load: (elmLoaded: Promise<unknown>) => Promise<void>;
   flags: unknown;
