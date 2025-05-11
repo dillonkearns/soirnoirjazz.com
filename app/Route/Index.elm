@@ -140,30 +140,6 @@ view app shared model =
                             , Attr.alt "Soir Noir Jazz Band"
                             ]
                             []
-                        , Html.div
-                            [ Attr.class "hidden sm:mt-32 sm:flex lg:mt-16"
-                            ]
-                            [ Html.div
-                                [ Attr.class "relative rounded-full px-3 py-1 text-sm/6 text-text-tertiary ring-1 ring-noir-border hover:ring-noir-hover"
-                                ]
-                                [ Html.text "  Next Event: Fox Wine Co., Sunday, March 23, 5:00–7:00 PM. "
-                                , Html.a
-                                    [ Attr.href "#upcoming-shows"
-                                    , Attr.class "font-semibold whitespace-nowrap text-gold-primary hover:text-gold-light focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-primary"
-                                    ]
-                                    [ Html.span
-                                        [ Attr.class "absolute inset-0"
-                                        , Attr.attribute "aria-hidden" "true"
-                                        ]
-                                        []
-                                    , Html.text "See Upcoming Shows "
-                                    , Html.span
-                                        [ Attr.attribute "aria-hidden" "true"
-                                        ]
-                                        [ Html.text "→" ]
-                                    ]
-                                ]
-                            ]
                         , Html.h1
                             [ Attr.class "mt-12 text-5xl text-pretty  sm:mt-10 sm:text-8xl font-heading flex flex-col gap-2 text-center"
                             ]
