@@ -135,6 +135,15 @@ view app shared model =
                             [ Html.span [] [ Html.text "SOIR" ]
                             , Html.span [] [ Html.text "NOIR" ]
                             ]
+                        , Html.div
+                            [ Attr.class "flex justify-center mt-4 mb-6" ]
+                            [ Html.img
+                                [ Attr.src "/seperator-cropped2.png"
+                                , Attr.alt "Decorative separator"
+                                , Attr.class "w-64 sm:w-80 opacity-80"
+                                ]
+                                []
+                            ]
                         , Html.p
                             [ Attr.class "mt-8 text-lg font-medium text-text-secondary sm:text-xl"
                             ]
