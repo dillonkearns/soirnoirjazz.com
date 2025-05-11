@@ -140,7 +140,7 @@ view app shared model =
                             [ Html.img
                                 [ Attr.src "/seperator-cropped2.png"
                                 , Attr.alt "Decorative separator"
-                                , Attr.class "w-64 sm:w-80 opacity-80"
+                                , Attr.class "w-48 sm:w-56 md:w-64 opacity-80"
                                 ]
                                 []
                             ]
