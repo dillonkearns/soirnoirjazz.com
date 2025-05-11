@@ -129,18 +129,7 @@ view app shared model =
                     [ Html.div
                         [ Attr.class "mx-auto max-w-lg lg:mx-0"
                         ]
-                        [ Html.img
-                            [ Attr.class "h-32 invert brightness-75"
-
-                            --, Attr.src "/keyboard.svg"
-                            , Attr.src "/glass.png"
-
-                            --, Attr.width 51
-                            --, Attr.height 51
-                            , Attr.alt "Soir Noir Jazz Band"
-                            ]
-                            []
-                        , Html.h1
+                        [ Html.h1
                             [ Attr.class "mt-12 text-5xl text-pretty  sm:mt-10 sm:text-8xl font-heading flex flex-col gap-2 text-center"
                             ]
                             [ Html.span [] [ Html.text "SOIR" ]
