@@ -16,6 +16,7 @@
     "vite": "^6.2.1"
   },
   "dependencies": {
+    "@fontsource/forum": "^5.2.5",
     "@fontsource/limelight": "^5.2.5",
     "@netlify/functions": "^3.0.1",
     "@tailwindcss/vite": "^4.0.14"

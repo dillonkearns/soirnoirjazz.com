@@ -165,9 +165,11 @@ view app shared model =
                                 ]
                             ]
                         , Html.h1
-                            [ Attr.class "mt-12 text-5xl font-semibold tracking-tight text-pretty text-text-primary sm:mt-10 sm:text-7xl font-[Limelight]"
+                            [ Attr.class "mt-12 text-5xl text-pretty  sm:mt-10 sm:text-8xl font-heading flex flex-col gap-2 text-center"
                             ]
-                            [ Html.text "Soir Noir" ]
+                            [ Html.span [] [ Html.text "SOIR" ]
+                            , Html.span [] [ Html.text "NOIR" ]
+                            ]
                         , Html.p
                             [ Attr.class "mt-8 text-lg font-medium text-text-secondary sm:text-xl"
                             ]
