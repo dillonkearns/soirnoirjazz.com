@@ -153,14 +153,14 @@ view app shared model =
                             ]
                             [ Route.Contact
                                 |> Route.link
-                                    [ Attr.class "rounded-md bg-gold-primary px-3.5 py-2.5 text-sm font-semibold text-text-primary shadow-sm hover:bg-gold-dark focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-primary"
+                                    [ Attr.class "border border-gold-light/40 px-5 py-2.5 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
                                     ]
-                                    [ Html.text "Inquire About Booking" ]
+                                    [ Html.text "INQUIRE ABOUT BOOKING" ]
                             , Html.a
                                 [ Attr.href "#event-clips"
-                                , Attr.class "text-sm/6 font-semibold text-gold-light hover:text-gold-light focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-light"
+                                , Attr.class "border border-gold-light/40 px-5 py-2.5 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
                                 ]
-                                [ Html.text "See Event Clips "
+                                [ Html.text "SEE EVENT CLIPS "
                                 , Html.span
                                     [ Attr.attribute "aria-hidden" "true"
                                     ]
@@ -322,10 +322,10 @@ eventView zone event =
                 , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-noir-border xl:pl-3.5" ]
                     [ Html.a
                         [ Attr.href (Event.addToGoogleCalendarUrl zone event)
-                        , Attr.class "inline-flex items-center gap-x-2 rounded-md border border-gold-primary px-4 py-2 text-sm font-semibold text-gold-primary shadow-sm hover:bg-noir-secondary focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-primary"
+                        , Attr.class "inline-flex items-center gap-x-2 border border-gold-light/40 px-4 py-2 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
                         , Attr.target "_blank"
                         ]
-                        [ Html.text "Add to Google Calendar"
+                        [ Html.text "ADD TO GOOGLE CALENDAR"
                         ]
                     ]
                 ]
