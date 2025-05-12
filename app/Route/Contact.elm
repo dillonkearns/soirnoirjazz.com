@@ -113,151 +113,101 @@ view :
 view app shared model =
     { title = "Soir Noir | Bookings & Contact"
     , body =
-        [ pageWrapper
-            [ pageHeader
-            , bandImage
-            , bookingTitle
-            , contactForm
-            ]
-        , Footer.footer True
+        [ contactSection
+        , Footer.footer True -- Keep the dark footer
         ]
     }
 
 
-pageWrapper : List (Html msg) -> Html msg
-pageWrapper content =
+contactSection : Html msg
+contactSection =
     Html.div
-        [ Attr.class "flex flex-col min-h-screen bg-noir-primary text-gold-light font-serif"
+        [ Attr.class "relative bg-noir-primary min-h-screen"
         ]
-        [ Html.div [ Attr.class "flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex flex-col items-center" ] content
-        ]
-
-
-pageHeader : Html msg
-pageHeader =
-    Html.div
-        [ Attr.class "flex flex-col items-center w-full py-8 sm:py-12"
-        ]
-        [ -- highlight-start
-          Html.h1
-            [ Attr.class "text-5xl sm:text-7xl font-heading text-center text-gold-light" -- Slightly smaller font, horizontal by default
+        [ Html.div
+            [ Attr.class "lg:absolute lg:inset-0 lg:left-1/2"
             ]
-            [ Html.text "SOIR NOIR" ]
-
-        --, Html.p
-        --    -- "JAZZ BAND" as a separate line below
-        --    [ Attr.class "text-xl sm:text-2xl text-white text-center mt-1 sm:mt-2"
-        --    ]
-        --    [ Html.text "JAZZ BAND" ]
-        -- highlight-end
-        , Html.div
-            [ Attr.class "flex justify-center mt-4 mb-6" ]
             [ Html.img
-                [ Attr.src "/seperator-cropped2.png"
-                , Attr.alt "Decorative separator"
-                , Attr.class "w-48 sm:w-56 md:w-64 opacity-80"
+                [ Attr.class "h-64 w-full bg-noir-primary object-cover sm:h-80 lg:absolute lg:h-full filter grayscale contrast-125 brightness-90"
+                , Attr.src "/duo.jpg"
+                , Attr.alt "Soir Noir performing"
                 ]
                 []
             ]
-        ]
-
-
-bandImage : Html msg
-bandImage =
-    Html.div
-        [ Attr.class "my-8 sm:my-12 flex justify-center w-full"
-        ]
-        [ Html.img
-            [ Attr.src "/duo.jpg"
-            , Attr.alt "Soir Noir Jazz Band performing"
-            , Attr.class "w-full max-w-3xl h-auto object-cover filter grayscale contrast-125 brightness-90"
+        , Html.div
+            [ Attr.class "pt-16 pb-24 sm:pt-24 sm:pb-32 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:pt-32"
             ]
-            []
-        ]
-
-
-bookingTitle : Html msg
-bookingTitle =
-    Html.div
-        [ Attr.class "text-center mt-8 mb-6 sm:mt-12 sm:mb-10 w-full"
-        ]
-        [ Html.h2
-            [ Attr.class "text-3xl sm:text-4xl font-semibold text-gold-light uppercase tracking-wider mb-2 font-serif"
-            ]
-            [ Html.text "BOOKINGS" ]
-        , Html.p
-            -- highlight-start
-            [ Attr.class "text-lg text-white uppercase tracking-widest font-light" -- Changed to text-white
-
-            -- highlight-end
-            ]
-            [ Html.text "CONTACT FORM" ]
-        ]
-
-
-contactForm : Html msg
-contactForm =
-    Html.div
-        [ Attr.class "flex justify-center w-full"
-        ]
-        [ Html.form
-            [ Attr.attribute "action" "https://usebasin.com/f/1af1dfb3e14e"
-            , Attr.method "POST"
-            , Attr.id "contact-form"
-            , Attr.attribute "enctype" "multipart/form-data"
-            , Attr.class "w-full max-w-md space-y-6"
-            ]
-            [ formField "name" "Name" "text" True Nothing
-            , formField "email" "Email" "email" True Nothing
-            , formField "venue" "Venue" "text" False (Just "Optional: Event Location / Venue Name") -- isRequired is False
-            , formField "message" "Message" "textarea" True Nothing
-            , Html.div
-                [ Attr.class "pt-6"
+            [ Html.div
+                [ Attr.class "px-6 lg:px-8"
                 ]
-                [ Html.button
-                    [ Attr.type_ "submit"
-                    , Attr.class """
-                        w-full inline-flex justify-center py-3 px-4 border border-gold-light shadow-sm
-                        text-base font-medium rounded-none text-noir-primary bg-gold-light
-                        hover:bg-gold-light/90 focus:outline-none focus:ring-2 focus:ring-offset-2
-                        focus:ring-offset-noir-primary focus:ring-gold-light uppercase tracking-wider font-serif
-                      """
+                [ Html.div
+                    [ Attr.class "mx-auto max-w-xl lg:mx-0 lg:max-w-lg"
                     ]
-                    [ Html.text "Send Message" ]
+                    [ Html.h2
+                        [ Attr.class "text-4xl font-heading tracking-tight text-gold-light sm:text-5xl"
+                        ]
+                        [ Html.text "Get in Touch" ]
+                    , Html.p
+                        [ Attr.class "mt-4 text-lg leading-8 text-gray-300"
+                        ]
+                        [ Html.text "Feel free to reach out about Jazz bookings, musical collaborations, or general inquiries. We look forward to connecting about your event or project!" ]
+                    , Html.form
+                        [ Attr.action "https://usebasin.com/f/1af1dfb3e14e"
+                        , Attr.method "POST"
+                        , Attr.id "contact-form"
+                        , Attr.attribute "enctype" "multipart/form-data"
+                        , Attr.class "mt-16"
+                        ]
+                        [ Html.div
+                            [ Attr.class "grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2" -- Form grid
+                            ]
+                            [ formField "name" "Name" "text" True "sm:col-span-2" Nothing
+                            , formField "email" "Email" "email" True "sm:col-span-2" Nothing
+                            , formField "venue" "Venue" "text" False "sm:col-span-2" (Just "Event Location / Venue Name")
+                            , formField "message" "Message" "textarea" True "sm:col-span-2" (Just "Tell us about your event or inquiry...")
+                            ]
+                        , Html.div
+                            [ Attr.class "mt-10 flex justify-end border-t border-gold-light/20 pt-8"
+                            ]
+                            [ Html.button
+                                [ Attr.type_ "submit"
+                                , Attr.class """
+                                    inline-flex justify-center py-2.5 px-4 border border-gold-light shadow-sm
+                                    text-base font-semibold rounded-none text-noir-primary bg-gold-light
+                                    hover:bg-gold-light/90 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                    focus:ring-offset-noir-primary focus:ring-gold-light uppercase tracking-wider font-serif
+                                  """
+                                ]
+                                [ Html.text "Send Message" ]
+                            ]
+                        ]
+                    ]
                 ]
             ]
         ]
 
 
-formField : String -> String -> String -> Bool -> Maybe String -> Html msg
-formField fieldId labelText inputType isRequired maybePlaceholder =
-    Html.div []
-        [ -- highlight-start
-          Html.div
-            -- Wrapper for label text and "Optional" indicator
-            [ Attr.class "flex justify-between items-baseline mb-1"
+formField : String -> String -> String -> Bool -> String -> Maybe String -> Html msg
+formField fieldId labelText inputType isRequired gridSpanClasses maybePlaceholder =
+    Html.div
+        [ Attr.class gridSpanClasses ]
+        [ Html.div
+            [ Attr.class "flex justify-between items-baseline mb-1.5"
             ]
             [ Html.label
                 [ Attr.for fieldId
-
-                -- Label text is now white
-                , Attr.class "text-sm font-medium text-white uppercase tracking-wider"
+                , Attr.class "block text-sm font-semibold leading-6 text-white"
                 ]
                 [ Html.text labelText ]
             , if not isRequired then
                 Html.span
-                    -- "Optional" text styling
-                    [ Attr.class "text-xs text-gold-light opacity-70 font-normal normal-case"
+                    [ Attr.class "text-sm leading-6 text-gold-light opacity-70"
                     ]
                     [ Html.text "Optional" ]
 
               else
                 Html.span [] []
-
-            -- Empty span to keep flex alignment if needed, or remove
             ]
-
-        -- highlight-end
         , Html.div
             [ Attr.class "mt-1"
             ]
@@ -291,8 +241,8 @@ formField fieldId labelText inputType isRequired maybePlaceholder =
 formInputClasses : String -> String
 formInputClasses inputType =
     String.join " "
-        [ "block w-full bg-black/50 border border-gold-light rounded-none px-3 py-2"
-        , "text-base text-gray-100 placeholder-gray-500"
-        , "focus:outline-none focus:ring-1 focus:ring-gold-light focus:border-gold-light"
-        , "shadow-inner"
+        [ "block w-full rounded-none border-0 px-3.5 py-2"
+        , "bg-white/5 text-white shadow-sm ring-1 ring-inset ring-white/10"
+        , "placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-gold-light"
+        , "sm:text-sm sm:leading-6"
         ]
