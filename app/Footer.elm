@@ -73,7 +73,7 @@ innerThing =
                     ]
                 ]
             , Html.a
-                [ Attr.href "mailto:info@soirnoirjazz.com"
+                [ Attr.href "mailto:soirnoirjazz@gmail.com"
                 , Attr.class "text-gold-primary hover:text-gold-light focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 focus:ring-offset-noir-primary rounded-md"
                 ]
                 [ Html.span

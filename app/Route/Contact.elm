@@ -262,9 +262,9 @@ contactFormNew =
                             , Html.dd []
                                 [ Html.a
                                     [ Attr.class "hover:text-white"
-                                    , Attr.href "mailto:info@soirnoirjazz.com"
+                                    , Attr.href "mailto:soirnoirjazz@gmail.com"
                                     ]
-                                    [ Html.text "info@soirnoirjazz.com" ]
+                                    [ Html.text "soirnoirjazz@gmail.com" ]
                                 ]
                             ]
                         ]
