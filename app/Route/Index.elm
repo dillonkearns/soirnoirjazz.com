@@ -271,7 +271,7 @@ eventView zone event =
                 [ Html.text (DateFormat.format [ DateFormat.dayOfWeekNameAbbreviated ] zone event.dateTimeStart) ]
 
             -- Month and day (with nowrap to prevent breaking)
-            , Html.div [ Attr.class "text-3xl font-bold mt-1 text-cente" ]
+            , Html.div [ Attr.class "text-3xl font-bold mt-1 text-center" ]
                 [ Html.span
                     [ Attr.class "whitespace-nowrap" ]
                     [ Html.text (DateFormat.format [ DateFormat.monthNameAbbreviated, DateFormat.text " ", DateFormat.dayOfMonthNumber ] zone event.dateTimeStart) ]
@@ -294,8 +294,8 @@ eventView zone event =
                     [ Html.text event.location.name ]
                 ]
 
-            -- Time
-            , Html.div [ Attr.class "mt-2 flex flex-col gap-2" ]
+            -- Time (updated with text-right class)
+            , Html.div [ Attr.class "mt-2 flex flex-col gap-2  text-right" ]
                 [ Html.div [ Attr.class "text-md" ]
                     [ Html.text (formatTime zone event.dateTimeStart ++ " - " ++ formatTime zone event.dateTimeEnd)
                     ]
