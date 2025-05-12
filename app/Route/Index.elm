@@ -226,11 +226,12 @@ videoSection =
             [ Attr.class "mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none" ]
             [ div
                 [ Attr.class "grid max-w-xl grid-cols-1 gap-x-8 gap-y-12 lg:max-w-none grid-cols-1 place-items-center" ]
-                [ youtubeEmbedHorizontal "4-pFT1gSXcA?si=fJ7FquG3ppDNx1pG"
-                , youtubeEmbed "goWJH-F1FK8"
+                [ --youtubeEmbedHorizontal "4-pFT1gSXcA?si=fJ7FquG3ppDNx1pG"
+                  youtubeEmbed "goWJH-F1FK8"
                 , youtubeEmbed "9wXe_-JZu5A?si=tnr0Ni7pvxM7Z9cZ"
                 , youtubeEmbed "RnJZW9CvYok"
-                , youtubeEmbed "yElkWb_wN60"
+
+                --, youtubeEmbed "yElkWb_wN60"
                 , youtubeEmbed "vyq2MWUOYgs"
                 ]
             ]
