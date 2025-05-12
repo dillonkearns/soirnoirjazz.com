@@ -157,10 +157,10 @@ contactSection =
                         [ Attr.class "mx-auto max-w-xl lg:mx-0 lg:max-w-lg" ]
                         [ Html.h2
                             [ Attr.class "text-3xl sm:text-4xl font-heading tracking-tight text-gold-light" ]
-                            [ Html.text "Get in Touch" ]
+                            [ Html.text "Send Booking Inquiry" ]
                         , Html.p
                             [ Attr.class "mt-3 text-lg leading-8 text-gray-300" ]
-                            [ Html.text "Feel free to reach out about Jazz bookings, musical collaborations, or general inquiries. We look forward to connecting about your event or project!" ]
+                            [ Html.text "Soir Noir provides sophisticated live jazz for events throughout the Santa Barbara area. Provide your details below for booking availability and other inquiries." ]
                         , Html.form
                             [ Attr.action "https://usebasin.com/f/1af1dfb3e14e"
                             , Attr.method "POST"
