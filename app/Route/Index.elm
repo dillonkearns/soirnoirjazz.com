@@ -151,15 +151,8 @@ view app shared model =
                         , Html.div
                             [ Attr.class "mt-10 flex items-center gap-x-6"
                             ]
-                            [ Route.Contact
-                                |> Route.link
-                                    [ Attr.class "border border-gold-light/40 px-5 py-2.5 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
-                                    ]
-                                    [ Html.text "INQUIRE ABOUT BOOKING" ]
-                            , Html.a
-                                [ Attr.href "#event-clips"
-                                , Attr.class "border border-gold-light/40 px-5 py-2.5 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
-                                ]
+                            [ elegantRouteButton Route.Contact [ Html.text "INQUIRE ABOUT BOOKING" ]
+                            , elegantButton [ Attr.href "#event-clips" ]
                                 [ Html.text "SEE EVENT CLIPS "
                                 , Html.span
                                     [ Attr.attribute "aria-hidden" "true"
@@ -172,12 +165,19 @@ view app shared model =
                 , Html.div
                     [ Attr.class "relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0"
                     ]
-                    [ Cloudinary.responsiveImg
-                        { altText = "Soir Noir"
-                        , cloudinaryId = "v1742066379/hero-color_oh0rng.jpg"
-                        , cssClass = "aspect-3/2 w-full bg-dark-surface object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
-                        , baseSize = 1000
-                        }
+                    [ --Cloudinary.responsiveImg
+                      --    { altText = "Soir Noir"
+                      --    , cloudinaryId = "v1742066379/hero-color_oh0rng.jpg"
+                      --    , cssClass = "aspect-3/2 w-full bg-dark-surface object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
+                      --    , baseSize = 1000
+                      --    }
+                      Html.img
+                        [ Attr.src "/duo.jpg"
+
+                        -- black and white effect
+                        , Attr.class "aspect-3/2 w-full bg-dark-surface object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full grayscale contrast-100"
+                        ]
+                        []
                     ]
                 ]
             ]
@@ -320,9 +320,8 @@ eventView zone event =
                         ]
                     ]
                 , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-noir-border xl:pl-3.5" ]
-                    [ Html.a
+                    [ elegantButton
                         [ Attr.href (Event.addToGoogleCalendarUrl zone event)
-                        , Attr.class "inline-flex items-center gap-x-2 border border-gold-light/40 px-4 py-2 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
                         , Attr.target "_blank"
                         ]
                         [ Html.text "ADD TO GOOGLE CALENDAR"
@@ -393,6 +392,25 @@ mapIcon =
             ]
             []
         ]
+
+
+elegantButton : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+elegantButton additionalAttributes children =
+    Html.a
+        ([ Attr.class "border-2 border-gold-light/50 px-5 py-2.5 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
+         ]
+            ++ additionalAttributes
+        )
+        children
+
+
+elegantRouteButton : Route.Route -> List (Html msg) -> Html msg
+elegantRouteButton route_ children =
+    route_
+        |> Route.link
+            [ Attr.class "border-2 border-gold-light/50 px-5 py-2.5 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
+            ]
+            children
 
 
 eventsView : List Event -> Time.Zone -> Html msg
