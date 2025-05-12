@@ -217,10 +217,10 @@ videoSection =
                 [ Attr.class "text-3xl text-text-primary sm:text-4xl uppercase font-heading text-pretty"
                 , Attr.id "event-clips"
                 ]
-                [ text "Event Clips" ]
+                [ text "Live Moments" ]
             , p
                 [ Attr.class "mt-6 text-lg text-text-secondary" ]
-                [ text "Get a feel for the vibe with recent live clips." ]
+                [ text "Get a taste of our sound." ]
             ]
         , div
             [ Attr.class "mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none" ]
