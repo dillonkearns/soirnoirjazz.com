@@ -103,7 +103,7 @@ head app =
             , dimensions = Nothing
             , mimeType = Nothing
             }
-        , description = "Santa Barbara Jazz Band"
+        , description = "Soir Noir - Santa Barbara Jazz Band"
         , locale = Nothing
         , title = "Soir Noir - Santa Barbara Jazz Band"
         }
