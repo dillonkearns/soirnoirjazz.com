@@ -130,7 +130,7 @@ view app shared model =
                         [ Attr.class "mx-auto max-w-lg lg:mx-0"
                         ]
                         [ Html.h1
-                            [ Attr.class "mt-12 text-5xl text-pretty  sm:mt-10 sm:text-8xl font-heading flex flex-col gap-2 text-center text-gold-light"
+                            [ Attr.class "mt-12 text-5xl text-pretty sm:mt-10 sm:text-8xl font-heading flex flex-col gap-2 text-center text-gold-light"
                             ]
                             [ Html.span [] [ Html.text "SOIR" ]
                             , Html.span [] [ Html.text "NOIR" ]
@@ -215,7 +215,7 @@ videoSection =
         [ div
             [ Attr.class "mx-auto max-w-2xl lg:text-center" ]
             [ h2
-                [ Attr.class "text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl"
+                [ Attr.class "text-3xl text-text-primary sm:text-4xl uppercase font-heading text-pretty"
                 , Attr.id "event-clips"
                 ]
                 [ text "Event Clips" ]
