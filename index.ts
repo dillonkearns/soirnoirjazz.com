@@ -1,4 +1,5 @@
 import '@fontsource/limelight';
+import "@fontsource/arvo";
 
 import '@fontsource/forum';
 type ElmPagesInit = {
