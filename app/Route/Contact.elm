@@ -114,7 +114,7 @@ view app shared model =
     { title = "Soir Noir | Bookings & Contact"
     , body =
         [ contactSection
-        , Footer.footer True
+        , Footer.footer False
         ]
     }
 
