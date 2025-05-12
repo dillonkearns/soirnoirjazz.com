@@ -19,6 +19,7 @@ import PagesMsg
 import Route
 import RouteBuilder
 import Shared
+import Style
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr
 import UrlPath
@@ -179,12 +180,7 @@ contactSection =
                                 [ Attr.class "mt-10 flex justify-end border-t border-gold-light/20 pt-8" ]
                                 [ Html.button
                                     [ Attr.type_ "submit"
-                                    , Attr.class """
-                                        inline-flex justify-center py-2.5 px-4 border border-gold-light shadow-sm
-                                        text-base font-semibold rounded-none text-noir-primary bg-gold-light
-                                        hover:bg-gold-light/90 focus:outline-none focus:ring-2 focus:ring-offset-2
-                                        focus:ring-offset-noir-primary focus:ring-gold-light uppercase tracking-wider font-serif
-                                      """
+                                    , Attr.class Style.buttonClasses
                                     ]
                                     [ Html.text "Send Message" ]
                                 ]
