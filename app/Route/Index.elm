@@ -1,7 +1,6 @@
 module Route.Index exposing (ActionData, Data, Model, Msg, route)
 
 import BackendTask exposing (BackendTask)
-import Cloudinary
 import DateFormat
 import Effect exposing (Effect)
 import Event exposing (Event, Venue)
@@ -227,7 +226,9 @@ videoSection =
             [ Attr.class "mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none" ]
             [ div
                 [ Attr.class "grid max-w-xl grid-cols-1 gap-x-8 gap-y-12 lg:max-w-none grid-cols-1 place-items-center" ]
-                [ video1 ]
+                [ youtubeEmbedHorizontal "4-pFT1gSXcA?si=fJ7FquG3ppDNx1pG"
+                , youtubeEmbed "9wXe_-JZu5A?si=tnr0Ni7pvxM7Z9cZ"
+                ]
             ]
         ]
 
@@ -446,13 +447,32 @@ googleDriveEmbed driveId =
         ]
 
 
-video1 : Html msg
-video1 =
+youtubeEmbed : String -> Html msg
+youtubeEmbed youtubeId =
     Html.div
         []
         [ Html.iframe
-            [ Attr.src "https://www.youtube.com/embed/9wXe_-JZu5A?si=tnr0Ni7pvxM7Z9cZ"
-            , Attr.class "w-full bg-gray-200 shadow-lg rounded-xl overflow-hidden aspect-9/16"
+            [ Attr.src <| "https://www.youtube.com/embed/" ++ youtubeId
+            , Attr.class "w-full bg-gray-200 shadow-lg rounded-xl overflow-hidden aspect-9/16 grayscale contrast-100"
+            , Attr.style "width" "100%"
+            , Attr.style "height" "700px"
+            , Attr.title "YouTube video player"
+            , Attr.attribute "frameborder" "0"
+            , Attr.attribute "allow" "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            , Attr.attribute "referrerpolicy" "strict-origin-when-cross-origin"
+            , Attr.attribute "allowfullscreen" ""
+            ]
+            []
+        ]
+
+
+youtubeEmbedHorizontal : String -> Html msg
+youtubeEmbedHorizontal youtubeId =
+    Html.div
+        []
+        [ Html.iframe
+            [ Attr.src <| "https://www.youtube.com/embed/" ++ youtubeId
+            , Attr.class "w-full bg-gray-200 shadow-lg rounded-xl overflow-hidden aspect-16/9 grayscale contrast-100"
             , Attr.style "width" "100%"
             , Attr.style "height" "700px"
             , Attr.title "YouTube video player"
