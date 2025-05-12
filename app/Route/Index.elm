@@ -96,7 +96,9 @@ head app =
         { canonicalUrlOverride = Nothing
         , siteName = "Soir Noir"
         , image =
-            { url = [ "avatar.png" ] |> Pages.Url.fromPath
+            -- TODO use this code after deploying to the canonical URL
+            --{ url = [ "avatar.png" ] |> Pages.Url.fromPath
+            { url = "https://soirnoir.netlify.app/avatar.png" |> Pages.Url.external
             , alt = "Soir Noir"
             , dimensions = Nothing
             , mimeType = Nothing
