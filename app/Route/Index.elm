@@ -271,7 +271,7 @@ eventView zone event =
                 [ Html.text (DateFormat.format [ DateFormat.dayOfWeekNameAbbreviated ] zone event.dateTimeStart) ]
 
             -- Month and day (with nowrap to prevent breaking)
-            , Html.div [ Attr.class "text-3xl font-bold mt-1 text-center" ]
+            , Html.div [ Attr.class "text-3xl font-bold mt-1 text-cente" ]
                 [ Html.span
                     [ Attr.class "whitespace-nowrap" ]
                     [ Html.text (DateFormat.format [ DateFormat.monthNameAbbreviated, DateFormat.text " ", DateFormat.dayOfMonthNumber ] zone event.dateTimeStart) ]
@@ -280,7 +280,7 @@ eventView zone event =
         , -- Content on right side
           Html.div [ Attr.class "flex-1 p-6" ]
             [ -- Venue name
-              Html.h3 [ Attr.class "text-2xl font-semibold " ]
+              Html.h3 [ Attr.class "text-2xl font-semibold" ]
                 [ (case event.ticketUrl of
                     Just url ->
                         Html.a
@@ -295,18 +295,19 @@ eventView zone event =
                 ]
 
             -- Time
-            , Html.div [ Attr.class "mt-2 text-md" ]
-                [ Html.text (formatTime zone event.dateTimeStart ++ " - " ++ formatTime zone event.dateTimeEnd) ]
-
-            ---- Add to Google Calendar button (commented out for now, looked a bit busy as is)
-            --, Html.div [ Attr.class "mt-2" ]
-            --    [ Html.a
-            --        [ Attr.href (Event.addToGoogleCalendarUrl zone event)
-            --        , Attr.target "_blank"
-            --        , Attr.class "text-gold-primary hover:text-white"
-            --        ]
-            --        [ Html.text "Add to Calendar" ]
-            --    ]
+            , Html.div [ Attr.class "mt-2 flex flex-col gap-2" ]
+                [ Html.div [ Attr.class "text-md" ]
+                    [ Html.text (formatTime zone event.dateTimeStart ++ " - " ++ formatTime zone event.dateTimeEnd)
+                    ]
+                , Html.div [ Attr.class "" ]
+                    [ Html.a
+                        [ Attr.href (Event.addToGoogleCalendarUrl zone event)
+                        , Attr.target "_blank"
+                        , Attr.class "text-gold-primary hover:text-white"
+                        ]
+                        [ Html.text "Add to Calendar" ]
+                    ]
+                ]
             ]
         ]
 
