@@ -130,10 +130,13 @@ view app shared model =
                         [ Attr.class "mx-auto max-w-lg lg:mx-0"
                         ]
                         [ Html.h1
-                            [ Attr.class "mt-12 text-5xl text-pretty  sm:mt-10 sm:text-8xl font-heading flex flex-col gap-2 text-center"
+                            [ Attr.class "mt-12 text-5xl text-pretty  sm:mt-10 sm:text-8xl font-heading flex flex-col gap-2 text-center text-gold-light"
                             ]
                             [ Html.span [] [ Html.text "SOIR" ]
                             , Html.span [] [ Html.text "NOIR" ]
+                            , Html.span
+                                [ Attr.class "text-xl sm:text-2xl  text-white" ]
+                                [ Html.text "JAZZ BAND" ]
                             ]
                         , Html.div
                             [ Attr.class "flex justify-center mt-4 mb-6" ]
@@ -145,7 +148,7 @@ view app shared model =
                                 []
                             ]
                         , Html.p
-                            [ Attr.class "mt-8 text-lg font-medium text-text-secondary sm:text-xl"
+                            [ Attr.class "mt-8 text-lg font-medium text-text-secondary sm:text-xl text-center"
                             ]
                             [ Html.text "Bringing sophistication and elegance to Santa Barbara's restaurants, wineries, bars, and private events with our unique jazz sound." ]
                         , Html.div
