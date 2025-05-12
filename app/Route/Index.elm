@@ -267,12 +267,15 @@ eventView zone event =
         [ -- Date box on left side
           Html.div [ Attr.class "w-32 border-r border-gray-700 flex flex-col justify-center items-center p-4" ]
             [ -- Day of week (large)
-              Html.div [ Attr.class "text-4xl" ]
+              Html.div [ Attr.class "text-4xl text-center" ]
                 [ Html.text (DateFormat.format [ DateFormat.dayOfWeekNameAbbreviated ] zone event.dateTimeStart) ]
 
-            -- Month and day
-            , Html.div [ Attr.class "text-3xl font-bold mt-1" ]
-                [ Html.text (DateFormat.format [ DateFormat.monthNameAbbreviated, DateFormat.text " ", DateFormat.dayOfMonthNumber ] zone event.dateTimeStart) ]
+            -- Month and day (with nowrap to prevent breaking)
+            , Html.div [ Attr.class "text-3xl font-bold mt-1 text-center" ]
+                [ Html.span
+                    [ Attr.class "whitespace-nowrap" ]
+                    [ Html.text (DateFormat.format [ DateFormat.monthNameAbbreviated, DateFormat.text " ", DateFormat.dayOfMonthNumber ] zone event.dateTimeStart) ]
+                ]
             ]
         , -- Content on right side
           Html.div [ Attr.class "flex-1 p-6" ]
