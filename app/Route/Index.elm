@@ -207,19 +207,24 @@ videoEmbed videoId =
         ]
 
 
+heading2 : String -> String -> Html msg
+heading2 text_ id =
+    h2
+        [ Attr.class "text-5xl text-text-primary uppercase font-heading text-pretty text-center"
+        , Attr.id id
+        ]
+        [ text text_ ]
+
+
 videoSection : Html msg
 videoSection =
     div
         [ Attr.class "mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8" ]
         [ div
             [ Attr.class "mx-auto max-w-2xl lg:text-center" ]
-            [ h2
-                [ Attr.class "text-3xl text-text-primary sm:text-4xl uppercase font-heading text-pretty"
-                , Attr.id "event-clips"
-                ]
-                [ text "Live Moments" ]
+            [ heading2 "Live Moments" "live"
             , p
-                [ Attr.class "mt-6 text-lg text-text-secondary" ]
+                [ Attr.class "mt-6 text-lg text-text-secondary text-center" ]
                 [ text "Get a taste of our sound." ]
             ]
         , div
@@ -243,15 +248,11 @@ eventsSection events zone =
     div
         [ Attr.class "mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8" ]
         [ div
-            [ Attr.class "mx-auto max-w-2xl lg:text-center" ]
-            [ h2
-                [ Attr.class "text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl"
-                , Attr.id "upcoming-shows"
-                ]
-                [ text "Upcoming Shows" ]
+            [ Attr.class "mx-auto max-w-2xl lg:text-center text-center" ]
+            [ heading2 "Upcoming Shows" "upcoming-shows"
             ]
         , div
-            [ Attr.class "mx-auto mt-8 max-w-2xl sm:mt-20 lg:mt-12 lg:max-w-none" ]
+            [ Attr.class "mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-12 lg:max-w-none" ]
             [ eventsView events zone
             ]
         ]
@@ -259,9 +260,22 @@ eventsSection events zone =
 
 eventView : Time.Zone -> Event -> Html msg
 eventView zone event =
-    Html.li [ Attr.class "relative flex gap-x-6 py-6 xl:static" ]
-        [ Html.div [ Attr.class "flex-auto" ]
-            [ Html.h3 [ Attr.class "pr-10 font-semibold text-text-primary xl:pr-0" ]
+    Html.div
+        [ Attr.class "mb-8 border border-gray-700 flex" ]
+        [ -- Date box on left side
+          Html.div [ Attr.class "w-32 border-r border-gray-700 flex flex-col justify-center items-center p-4" ]
+            [ -- Day of week (large)
+              Html.div [ Attr.class "text-4xl" ]
+                [ Html.text (DateFormat.format [ DateFormat.dayOfWeekNameAbbreviated ] zone event.dateTimeStart) ]
+
+            -- Month and day
+            , Html.div [ Attr.class "text-3xl font-bold mt-1" ]
+                [ Html.text (DateFormat.format [ DateFormat.monthNameAbbreviated, DateFormat.text " ", DateFormat.dayOfMonthNumber ] zone event.dateTimeStart) ]
+            ]
+        , -- Content on right side
+          Html.div [ Attr.class "flex-1 p-6" ]
+            [ -- Venue name
+              Html.h3 [ Attr.class "text-2xl font-semibold " ]
                 [ (case event.ticketUrl of
                     Just url ->
                         Html.a
@@ -270,73 +284,24 @@ eventView zone event =
                             ]
 
                     Nothing ->
-                        Html.span
-                            []
+                        Html.span []
                   )
-                    [ Html.text event.name
-                    ]
+                    [ Html.text event.location.name ]
                 ]
-            , Html.dl [ Attr.class "mt-2 flex flex-col text-text-tertiary xl:flex-row" ]
-                [ Html.div [ Attr.class "flex items-start gap-x-3" ]
-                    [ Html.dt [ Attr.class "mt-0.5" ]
-                        [ calendarIcon
-                        ]
-                    , Html.dd []
-                        [ Html.time
-                            [-- TODO
-                             --Attr.datetime
-                             --    event.dateTimeISO
-                            ]
-                            [ Html.text
-                                (DateFormat.format
-                                    [ DateFormat.dayOfWeekNameAbbreviated
-                                    , DateFormat.text ", "
-                                    , DateFormat.monthNameAbbreviated
-                                    , DateFormat.text " "
-                                    , DateFormat.dayOfMonthNumber
-                                    ]
-                                    zone
-                                    event.dateTimeStart
-                                )
-                            ]
-                        ]
-                    ]
-                , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-noir-border xl:pl-3.5" ]
-                    [ Html.dt [ Attr.class "mt-0.5" ]
-                        [ clockIcon ]
-                    , Html.dd []
-                        [ Html.time
-                            []
-                            [ Html.text
-                                (formatTime zone event.dateTimeStart
-                                    ++ " - "
-                                    ++ formatTime zone event.dateTimeEnd
-                                )
-                            ]
-                        ]
-                    ]
-                , Html.div [ Attr.class "min-w-3xs mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-noir-border xl:pl-3.5" ]
-                    [ Html.dt [ Attr.class "mt-0.5" ]
-                        [ mapIcon ]
-                    , Html.dd []
-                        [ Html.a
-                            [ Attr.href (Event.googleMapsUrl event)
-                            , Attr.target "_blank"
-                            , Attr.class "text-text-secondary hover:text-text-primary"
-                            ]
-                            [ Html.text event.location.name
-                            ]
-                        ]
-                    ]
-                , Html.div [ Attr.class "mt-2 flex items-start gap-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-noir-border xl:pl-3.5" ]
-                    [ elegantButton
-                        [ Attr.href (Event.addToGoogleCalendarUrl zone event)
-                        , Attr.target "_blank"
-                        ]
-                        [ Html.text "ADD TO GOOGLE CALENDAR"
-                        ]
-                    ]
-                ]
+
+            -- Time
+            , Html.div [ Attr.class "mt-2 text-md" ]
+                [ Html.text (formatTime zone event.dateTimeStart ++ " - " ++ formatTime zone event.dateTimeEnd) ]
+
+            ---- Add to Google Calendar button (commented out for now, looked a bit busy as is)
+            --, Html.div [ Attr.class "mt-2" ]
+            --    [ Html.a
+            --        [ Attr.href (Event.addToGoogleCalendarUrl zone event)
+            --        , Attr.target "_blank"
+            --        , Attr.class "text-gold-primary hover:text-white"
+            --        ]
+            --        [ Html.text "Add to Calendar" ]
+            --    ]
             ]
         ]
 
