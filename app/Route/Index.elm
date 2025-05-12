@@ -263,7 +263,7 @@ eventsSection events zone =
 eventView : Time.Zone -> Event -> Html msg
 eventView zone event =
     Html.div
-        [ Attr.class "mb-8 border border-white border-2 flex p-2" ]
+        [ Attr.class "mb-8 border border-white border-2 flex p-2 max-w-4xl mx-auto" ]
         [ -- Date box on left side
           Html.div [ Attr.class "w-32 border-r border-gray-700 flex flex-col justify-center items-center p-4" ]
             [ -- Day of week (large)
@@ -400,8 +400,10 @@ buttonClasses =
 
 eventsView : List Event -> Time.Zone -> Html msg
 eventsView events zone =
-    Html.ol [ Attr.class "mt-4 divide-y divide-noir-border text-sm/6 lg:col-span-7 xl:col-span-8" ]
-        (List.map (eventView zone) events)
+    Html.div [ Attr.class "flex flex-col items-center" ]
+        [ Html.ol [ Attr.class "mt-4 divide-y divide-noir-border text-sm/6 lg:col-span-7 xl:col-span-8 w-full" ]
+            (List.map (eventView zone) events)
+        ]
 
 
 twoHours : Int
