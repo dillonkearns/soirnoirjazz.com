@@ -3,6 +3,7 @@ module Footer exposing (footer)
 import Html exposing (Html)
 import Html.Attributes as Attr
 import Route
+import Style
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr
 
@@ -34,11 +35,7 @@ contactButton =
         [ Html.div
             [ Attr.class "mt-8 flex justify-center"
             ]
-            [ Route.Contact
-                |> Route.link
-                    [ Attr.class "rounded-md bg-gold-primary px-3.5 py-2.5 text-sm font-semibold text-text-primary shadow-sm hover:bg-gold-dark focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-primary"
-                    ]
-                    [ Html.text "Contact" ]
+            [ Style.elegantRouteButton Route.Contact [ Html.text "Contact" ]
             ]
         ]
 
