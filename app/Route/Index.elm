@@ -154,8 +154,8 @@ view app shared model =
                             [ Attr.class "mt-10 flex items-center gap-x-6"
                             ]
                             [ elegantRouteButton Route.Contact [ Html.text "INQUIRE ABOUT BOOKING" ]
-                            , elegantButton [ Attr.href "#event-clips" ]
-                                [ Html.text "SEE EVENT CLIPS "
+                            , elegantButton [ Attr.href "#event-clips", Attr.class "uppercase" ]
+                                [ Html.text "See Live Clips "
                                 , Html.span
                                     [ Attr.attribute "aria-hidden" "true"
                                     ]
