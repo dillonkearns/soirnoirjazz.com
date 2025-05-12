@@ -156,7 +156,7 @@ view app shared model =
                             [ Attr.class "mt-10 flex items-center gap-x-6"
                             ]
                             [ elegantRouteButton Route.Contact [ Html.text "INQUIRE ABOUT BOOKING" ]
-                            , elegantButton [ Attr.href "#event-clips", Attr.class "uppercase" ]
+                            , elegantButton [ Attr.href "#live-clips", Attr.class "uppercase" ]
                                 [ Html.text "See Live Clips "
                                 , Html.span
                                     [ Attr.attribute "aria-hidden" "true"
@@ -224,7 +224,7 @@ videoSection =
         [ Attr.class "mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8" ]
         [ div
             [ Attr.class "mx-auto max-w-2xl lg:text-center" ]
-            [ heading2 "Live Moments" "live"
+            [ heading2 "Live Moments" "live-clips"
             , p
                 [ Attr.class "mt-6 text-lg text-text-secondary text-center" ]
                 [ text "Get a taste of our sound." ]
