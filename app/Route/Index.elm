@@ -261,7 +261,7 @@ eventsSection events zone =
 eventView : Time.Zone -> Event -> Html msg
 eventView zone event =
     Html.div
-        [ Attr.class "mb-8 border border-gray-700 flex" ]
+        [ Attr.class "mb-8 border border-white border-3 flex p-2" ]
         [ -- Date box on left side
           Html.div [ Attr.class "w-32 border-r border-gray-700 flex flex-col justify-center items-center p-4" ]
             [ -- Day of week (large)
