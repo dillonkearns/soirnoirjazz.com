@@ -94,14 +94,14 @@ head :
 head app =
     Seo.summaryLarge
         { canonicalUrlOverride = Nothing
-        , siteName = "Soir Noir - Santa Barbara Jazz Band"
+        , siteName = "Soir Noir"
         , image =
-            { url = "https://res.cloudinary.com/dillonkearns/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1742066379/hero-color_oh0rng.jpg" |> Pages.Url.external
+            { url = [ "avatar.png" ] |> Pages.Url.fromPath
             , alt = "Soir Noir"
             , dimensions = Nothing
             , mimeType = Nothing
             }
-        , description = "Soir Noir Jazz Band"
+        , description = "Santa Barbara Jazz Band"
         , locale = Nothing
         , title = "Soir Noir - Santa Barbara Jazz Band"
         }
