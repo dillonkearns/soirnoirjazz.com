@@ -15,6 +15,7 @@ import PagesMsg exposing (PagesMsg)
 import Route
 import RouteBuilder exposing (App, StatefulRoute, StatelessRoute)
 import Shared
+import Style
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr
 import Task
@@ -155,8 +156,8 @@ view app shared model =
                         , Html.div
                             [ Attr.class "mt-10 flex items-center gap-x-6"
                             ]
-                            [ elegantRouteButton Route.Contact [ Html.text "INQUIRE ABOUT BOOKING" ]
-                            , elegantButton [ Attr.href "#live-clips", Attr.class "uppercase" ]
+                            [ Style.elegantRouteButton Route.Contact [ Html.text "INQUIRE ABOUT BOOKING" ]
+                            , Style.elegantButton [ Attr.href "#live-clips", Attr.class "uppercase" ]
                                 [ Html.text "See Live Clips "
                                 , Html.span
                                     [ Attr.attribute "aria-hidden" "true"
@@ -372,30 +373,6 @@ mapIcon =
             ]
             []
         ]
-
-
-elegantButton : List (Html.Attribute msg) -> List (Html msg) -> Html msg
-elegantButton additionalAttributes children =
-    Html.a
-        ([ Attr.class buttonClasses
-         ]
-            ++ additionalAttributes
-        )
-        children
-
-
-elegantRouteButton : Route.Route -> List (Html msg) -> Html msg
-elegantRouteButton route_ children =
-    route_
-        |> Route.link
-            [ Attr.class buttonClasses
-            ]
-            children
-
-
-buttonClasses : String
-buttonClasses =
-    "border text-center border-gold-light/70 px-6 py-3 text-sm tracking-wider text-gold-light hover:bg-gold-light/10 hover:border-gold-light hover:text-white hover:text-gold-primary transition-all duration-300 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase font-light"
 
 
 eventsView : List Event -> Time.Zone -> Html msg
