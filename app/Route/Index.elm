@@ -373,7 +373,7 @@ mapIcon =
 elegantButton : List (Html.Attribute msg) -> List (Html msg) -> Html msg
 elegantButton additionalAttributes children =
     Html.a
-        ([ Attr.class "border-2 border-gold-light/50 px-5 py-2.5 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
+        ([ Attr.class buttonClasses
          ]
             ++ additionalAttributes
         )
@@ -384,9 +384,14 @@ elegantRouteButton : Route.Route -> List (Html msg) -> Html msg
 elegantRouteButton route_ children =
     route_
         |> Route.link
-            [ Attr.class "border-2 border-gold-light/50 px-5 py-2.5 text-sm tracking-wide text-gold-light hover:border-gold-light hover:text-text-primary transition-colors duration-200 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase"
+            [ Attr.class buttonClasses
             ]
             children
+
+
+buttonClasses : String
+buttonClasses =
+    "border text-center border-gold-light/70 px-6 py-3 text-sm tracking-wider text-gold-light hover:bg-gold-light/10 hover:border-gold-light hover:text-white hover:text-gold-primary transition-all duration-300 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-gold-light uppercase font-light"
 
 
 eventsView : List Event -> Time.Zone -> Html msg
