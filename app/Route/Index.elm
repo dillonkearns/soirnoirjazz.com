@@ -150,7 +150,7 @@ view app shared model =
                         , Html.p
                             [ Attr.class "mt-8 text-lg font-medium text-text-secondary sm:text-xl text-center"
                             ]
-                            [ Html.text "Bringing sophistication and elegance to Santa Barbara's restaurants, wineries, bars, and private events with our unique jazz sound." ]
+                            [ Html.text "The perfect pairing for Santa Barbara’s finest restaurants, wineries, bars, and private events." ]
                         , Html.div
                             [ Attr.class "mt-10 flex items-center gap-x-6"
                             ]
