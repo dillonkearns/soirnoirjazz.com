@@ -114,7 +114,7 @@ view app shared model =
     { title = "Soir Noir | Bookings & Contact"
     , body =
         [ contactSection
-        , Footer.footer True -- Keep the dark footer
+        , Footer.footer True
         ]
     }
 
@@ -125,60 +125,69 @@ contactSection =
         [ Attr.class "relative bg-noir-primary min-h-screen"
         ]
         [ Html.div
-            [ Attr.class "lg:absolute lg:inset-0 lg:left-1/2"
+            [ Attr.class "mx-auto px-6 pt-6 pb-8 sm:pt-8 sm:pb-12 lg:px-8"
             ]
-            [ Html.img
-                [ Attr.class "h-64 w-full bg-noir-primary object-cover sm:h-80 lg:absolute lg:h-full filter grayscale contrast-125 brightness-90"
-                , Attr.src "/duo.jpg"
-                , Attr.alt "Soir Noir performing"
+            [ Html.nav []
+                [ Route.Index
+                    |> Route.link
+                        [ Attr.class "inline-block" ]
+                        [ Html.h1
+                            [ Attr.class "text-2xl sm:text-3xl font-heading text-gold-light hover:text-gold-light/80 transition-colors duration-200 p-2 border-gold-light border-2"
+                            ]
+                            [ Html.text "SOIR NOIR" ]
+                        ]
                 ]
-                []
             ]
         , Html.div
-            [ Attr.class "pt-16 pb-24 sm:pt-24 sm:pb-32 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:pt-32"
-            ]
+            [ Attr.class "relative" ]
             [ Html.div
-                [ Attr.class "px-6 lg:px-8"
-                ]
-                [ Html.div
-                    [ Attr.class "mx-auto max-w-xl lg:mx-0 lg:max-w-lg"
+                [ Attr.class "lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2" ]
+                [ Html.img
+                    [ Attr.class "aspect-[3/2] w-full bg-noir-primary object-cover lg:absolute lg:inset-y-0 lg:z-0 lg:h-full filter grayscale contrast-125 brightness-90"
+                    , Attr.src "/duo.jpg"
+                    , Attr.alt "Soir Noir performing"
                     ]
-                    [ Html.h2
-                        [ Attr.class "text-4xl font-heading tracking-tight text-gold-light sm:text-5xl"
-                        ]
-                        [ Html.text "Get in Touch" ]
-                    , Html.p
-                        [ Attr.class "mt-4 text-lg leading-8 text-gray-300"
-                        ]
-                        [ Html.text "Feel free to reach out about Jazz bookings, musical collaborations, or general inquiries. We look forward to connecting about your event or project!" ]
-                    , Html.form
-                        [ Attr.action "https://usebasin.com/f/1af1dfb3e14e"
-                        , Attr.method "POST"
-                        , Attr.id "contact-form"
-                        , Attr.attribute "enctype" "multipart/form-data"
-                        , Attr.class "mt-16"
-                        ]
-                        [ Html.div
-                            [ Attr.class "grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2" -- Form grid
+                    []
+                ]
+            , Html.div
+                [ Attr.class "mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2 mt-8 lg:mt-0" ]
+                [ Html.div
+                    [ Attr.class "px-6 pb-24 sm:pb-32 lg:col-span-1 lg:px-8 lg:pb-48" ]
+                    [ Html.div
+                        [ Attr.class "mx-auto max-w-xl lg:mx-0 lg:max-w-lg" ]
+                        [ Html.h2
+                            [ Attr.class "text-3xl sm:text-4xl font-heading tracking-tight text-gold-light" ]
+                            [ Html.text "Get in Touch" ]
+                        , Html.p
+                            [ Attr.class "mt-3 text-lg leading-8 text-gray-300" ]
+                            [ Html.text "Feel free to reach out about Jazz bookings, musical collaborations, or general inquiries. We look forward to connecting about your event or project!" ]
+                        , Html.form
+                            [ Attr.action "https://usebasin.com/f/1af1dfb3e14e"
+                            , Attr.method "POST"
+                            , Attr.id "contact-form"
+                            , Attr.attribute "enctype" "multipart/form-data"
+                            , Attr.class "mt-12 sm:mt-16"
                             ]
-                            [ formField "name" "Name" "text" True "sm:col-span-2" Nothing
-                            , formField "email" "Email" "email" True "sm:col-span-2" Nothing
-                            , formField "venue" "Venue" "text" False "sm:col-span-2" (Just "Event Location / Venue Name")
-                            , formField "message" "Message" "textarea" True "sm:col-span-2" (Just "Tell us about your event or inquiry...")
-                            ]
-                        , Html.div
-                            [ Attr.class "mt-10 flex justify-end border-t border-gold-light/20 pt-8"
-                            ]
-                            [ Html.button
-                                [ Attr.type_ "submit"
-                                , Attr.class """
-                                    inline-flex justify-center py-2.5 px-4 border border-gold-light shadow-sm
-                                    text-base font-semibold rounded-none text-noir-primary bg-gold-light
-                                    hover:bg-gold-light/90 focus:outline-none focus:ring-2 focus:ring-offset-2
-                                    focus:ring-offset-noir-primary focus:ring-gold-light uppercase tracking-wider font-serif
-                                  """
+                            [ Html.div
+                                [ Attr.class "grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2" ]
+                                [ formField "name" "Name" "text" True "sm:col-span-2" Nothing
+                                , formField "email" "Email" "email" True "sm:col-span-2" Nothing
+                                , formField "venue" "Venue" "text" False "sm:col-span-2" (Just "Event Location / Venue Name")
+                                , formField "message" "Message" "textarea" True "sm:col-span-2" (Just "Tell us about your event or inquiry...")
                                 ]
-                                [ Html.text "Send Message" ]
+                            , Html.div
+                                [ Attr.class "mt-10 flex justify-end border-t border-gold-light/20 pt-8" ]
+                                [ Html.button
+                                    [ Attr.type_ "submit"
+                                    , Attr.class """
+                                        inline-flex justify-center py-2.5 px-4 border border-gold-light shadow-sm
+                                        text-base font-semibold rounded-none text-noir-primary bg-gold-light
+                                        hover:bg-gold-light/90 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                        focus:ring-offset-noir-primary focus:ring-gold-light uppercase tracking-wider font-serif
+                                      """
+                                    ]
+                                    [ Html.text "Send Message" ]
+                                ]
                             ]
                         ]
                     ]
@@ -192,8 +201,7 @@ formField fieldId labelText inputType isRequired gridSpanClasses maybePlaceholde
     Html.div
         [ Attr.class gridSpanClasses ]
         [ Html.div
-            [ Attr.class "flex justify-between items-baseline mb-1.5"
-            ]
+            [ Attr.class "flex justify-between items-baseline mb-1.5" ]
             [ Html.label
                 [ Attr.for fieldId
                 , Attr.class "block text-sm font-semibold leading-6 text-white"
@@ -201,16 +209,14 @@ formField fieldId labelText inputType isRequired gridSpanClasses maybePlaceholde
                 [ Html.text labelText ]
             , if not isRequired then
                 Html.span
-                    [ Attr.class "text-sm leading-6 text-gold-light opacity-70"
-                    ]
+                    [ Attr.class "text-sm leading-6 text-gold-light opacity-70" ]
                     [ Html.text "Optional" ]
 
               else
                 Html.span [] []
             ]
         , Html.div
-            [ Attr.class "mt-1"
-            ]
+            [ Attr.class "mt-1" ]
             (if inputType == "textarea" then
                 [ Html.textarea
                     [ Attr.name fieldId
