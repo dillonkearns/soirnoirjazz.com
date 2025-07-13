@@ -260,45 +260,21 @@ viewLineup zone event maybeBand musicians =
                     [ Attr.class "flex justify-center mt-6 mb-6" ]
                     [ Footer.socialBadges
                     ]
-
-                --, case maybeBand of
-                --    Just band ->
-                --        Html.div
-                --            [ Attr.class "flex gap-x-6 mt-8 justify-center"
-                --            ]
-                --            (List.map viewSocialIcon band.socialLinks)
-                --
-                --    Nothing ->
-                --        Html.div
-                --            [ Attr.class "flex gap-x-6 mt-8 justify-center"
-                --            ]
-                --            [ Footer.innerThing
-                --            ]
                 ]
-            , case maybeBand of
-                Just band ->
-                    Html.div []
-                        [ Html.h2
-                            [ Attr.class "text-3xl font-bold text-gold-light mt-16 mb-8 font-heading"
-                            ]
-                            [ Html.text "Featured Musicians" ]
-                        , Html.div
-                            [ Attr.class "space-y-8"
-                            ]
-                            (List.map viewMusician musicians)
+            , Html.div []
+                [ Html.h2
+                    [ Attr.class "text-3xl font-bold text-gold-light mt-16 mb-8 font-heading text-center"
+                    ]
+                    [ Html.text "Featured Musicians" ]
+                , Html.div
+                    [ Attr.class "max-w-4xl mx-auto"
+                    ]
+                    [ Html.div
+                        [ Attr.class "space-y-8"
                         ]
-
-                Nothing ->
-                    Html.div []
-                        [ Html.h2
-                            [ Attr.class "text-3xl font-bold text-gold-light mb-8 font-heading"
-                            ]
-                            [ Html.text "Tonight's Musicians" ]
-                        , Html.div
-                            [ Attr.class "space-y-8"
-                            ]
-                            (List.map viewMusician musicians)
-                        ]
+                        (List.map viewMusician musicians)
+                    ]
+                ]
             ]
         ]
 
@@ -316,7 +292,7 @@ viewMusician musician =
                     Html.img
                         [ Attr.src headshotUrl
                         , Attr.alt (musician.name ++ " headshot")
-                        , Attr.class "w-24 h-24 rounded object-cover flex-shrink-0"
+                        , Attr.class "w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded object-cover flex-shrink-0"
                         , Attr.style "filter" "grayscale(100%) contrast(1.2)"
                         , Attr.style "max-width" "200px"
                         , Attr.style "max-height" "200px"
@@ -326,7 +302,7 @@ viewMusician musician =
 
                 Nothing ->
                     Html.div
-                        [ Attr.class "w-24 h-24 rounded bg-gray-800 flex items-center justify-center flex-shrink-0 border-2 border-gray-700 mr-6"
+                        [ Attr.class "w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded bg-gray-800 flex items-center justify-center flex-shrink-0 border-2 border-gray-700 mr-6"
                         , Attr.style "max-width" "200px"
                         , Attr.style "max-height" "200px"
                         , Attr.style "aspect-ratio" "1"
