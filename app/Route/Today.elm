@@ -306,13 +306,19 @@ viewBand band =
                     Html.img
                         [ Attr.src avatarUrl
                         , Attr.alt (band.name ++ " logo")
-                        , Attr.class "w-20 h-20 rounded-full object-cover flex-shrink-0 border-2 border-yellow-500"
+                        , Attr.class "w-20 h-20 rounded object-cover flex-shrink-0 border-2 border-yellow-500 mr-6"
+                        , Attr.style "max-width" "200px"
+                        , Attr.style "max-height" "200px"
+                        , Attr.style "aspect-ratio" "1"
                         ]
                         []
 
                 Nothing ->
                     Html.div
-                        [ Attr.class "w-20 h-20 rounded-full bg-yellow-500 flex items-center justify-center flex-shrink-0"
+                        [ Attr.class "w-20 h-20 rounded bg-yellow-500 flex items-center justify-center flex-shrink-0 mr-6"
+                        , Attr.style "max-width" "200px"
+                        , Attr.style "max-height" "200px"
+                        , Attr.style "aspect-ratio" "1"
                         ]
                         [ Html.span
                             [ Attr.class "text-black text-2xl font-bold"
@@ -344,28 +350,34 @@ viewMusician musician =
         [ Attr.class "bg-gray-900/50 border-b border-gray-800 last:border-b-0 pb-8 last:pb-0"
         ]
         [ Html.div
-            [ Attr.class "flex items-center gap-6 mb-4"
+            [ Attr.class "flex items-center gap-x-6 mb-4"
             ]
             [ case musician.headshot of
                 Just headshotUrl ->
                     Html.img
                         [ Attr.src headshotUrl
                         , Attr.alt (musician.name ++ " headshot")
-                        , Attr.class "w-24 h-24 rounded-full object-cover flex-shrink-0 border-2 border-gray-700"
+                        , Attr.class "w-24 h-24 rounded object-cover flex-shrink-0"
                         , Attr.style "filter" "grayscale(100%) contrast(1.2)"
+                        , Attr.style "max-width" "200px"
+                        , Attr.style "max-height" "200px"
+                        , Attr.style "aspect-ratio" "1"
                         ]
                         []
 
                 Nothing ->
                     Html.div
-                        [ Attr.class "w-24 h-24 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 border-2 border-gray-700"
+                        [ Attr.class "w-24 h-24 rounded bg-gray-800 flex items-center justify-center flex-shrink-0 border-2 border-gray-700 mr-6"
+                        , Attr.style "max-width" "200px"
+                        , Attr.style "max-height" "200px"
+                        , Attr.style "aspect-ratio" "1"
                         ]
                         [ Html.span
                             [ Attr.class "text-gray-400 text-2xl font-bold"
                             ]
                             [ Html.text (String.left 1 musician.name) ]
                         ]
-            , Html.div [ Attr.class "flex-1" ]
+            , Html.div [ Attr.class "" ]
                 [ Html.h3
                     [ Attr.class "text-2xl font-bold text-white mb-1"
                     ]
