@@ -26,7 +26,7 @@ view params =
                     [ Html.text "Get the latest on Soir Noir's upcoming performances and videos on Dillon's mailing list." ]
                 ]
             , Html.form
-                [ Attr.action "https://usebasin.com/f/0e1501f666a8"
+                [ Attr.action "https://app.kit.com/forms/8167571/subscriptions"
                 , Attr.method "POST"
                 , Attr.class "max-w-md mx-auto"
                 ]
@@ -42,14 +42,14 @@ view params =
                             [ Html.text "First Name" ]
                         , Html.input
                             ([ Attr.type_ "text"
-                             , Attr.name "first_name"
+                             , Attr.name "fields[first_name]"
                              , Attr.id "first_name"
                              , Attr.placeholder "First name"
                              , Attr.class "w-full rounded-md bg-white/10 px-3.5 py-3 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gold-primary sm:text-sm/6"
                              ]
                                 ++ (case params.firstName of
-                                        Just value ->
-                                            [ Attr.value value ]
+                                        Just firstName ->
+                                            [ Attr.value firstName ]
 
                                         Nothing ->
                                             []
@@ -60,21 +60,22 @@ view params =
                     , Html.div
                         []
                         [ Html.label
-                            [ Attr.for "email"
+                            [ Attr.for "email_address"
                             , Attr.class "sr-only"
                             ]
-                            [ Html.text "Email" ]
+                            [ Html.text "Email address" ]
                         , Html.input
                             ([ Attr.type_ "email"
-                             , Attr.name "email"
-                             , Attr.id "email"
-                             , Attr.placeholder "Email address"
+                             , Attr.name "email_address"
+                             , Attr.id "email_address"
                              , Attr.required True
+                             , Attr.attribute "autocomplete" "email"
+                             , Attr.placeholder "Your email"
                              , Attr.class "w-full rounded-md bg-white/10 px-3.5 py-3 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gold-primary sm:text-sm/6"
                              ]
                                 ++ (case params.email of
-                                        Just value ->
-                                            [ Attr.value value ]
+                                        Just email ->
+                                            [ Attr.value email ]
 
                                         Nothing ->
                                             []
@@ -87,6 +88,11 @@ view params =
                         , Attr.class "w-full rounded-md bg-gold-primary px-3.5 py-3 text-sm font-semibold text-black shadow-sm hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-primary transition-colors"
                         ]
                         [ Html.text "Subscribe" ]
+                    ]
+                , Html.p
+                    [ Attr.class "mt-6 text-sm text-center text-gray-300"
+                    ]
+                    [ Html.text "Hit unsubscribe any time. I only send occasional updates about my music and upcoming shows."
                     ]
                 ]
             ]
