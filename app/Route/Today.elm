@@ -255,7 +255,7 @@ viewLineup zone event maybeBand musicians =
                 , Html.p
                     [ Attr.class "mt-8 text-lg font-medium text-text-secondary sm:text-xl text-center"
                     ]
-                    [ Html.text "The perfect pairing for Santa Barbara's finest restaurants, wineries, bars, and private events." ]
+                    [ Html.text "Timeless jazz standards" ]
                 , Html.div
                     [ Attr.class "flex justify-center mt-6 mb-6" ]
                     [ Footer.socialBadges

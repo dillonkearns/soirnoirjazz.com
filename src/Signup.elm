@@ -23,7 +23,7 @@ view params =
                 , Html.p
                     [ Attr.class "text-lg text-gray-300 max-w-xl mx-auto"
                     ]
-                    [ Html.text "Get the inside scoop on Soir Noir's upcoming performances, exclusive behind-the-scenes content, and the latest from the jazz scene." ]
+                    [ Html.text "Get the latest on Soir Noir's upcoming performances and videos on Dillon's mailing list." ]
                 ]
             , Html.form
                 [ Attr.action "https://usebasin.com/f/0e1501f666a8"
